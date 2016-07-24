@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -27,9 +27,6 @@ import com.finicityclient.component.StringUtils;
 import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.Parameter;
 import com.finicityclient.component.rest.Response;
-import com.finicityclient.type.Institution;
-import com.finicityclient.type.Institutions;
-import com.finicityclient.type.LoginForm;
 import com.finicityclient.component.rest.RestClient;
 import com.finicityclient.type.Institution;
 import com.finicityclient.type.InstitutionDetails;
@@ -41,10 +38,22 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Default implementation of {@link InstitutionOperations}.
+ */
 public class DefaultInstitutionOperations extends DefaultOperations implements InstitutionOperations {
-
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DefaultInstitutionOperations.class));
 
+    /**
+     * Construct a client for Institution operations.
+     *
+     * @param restClient A REST client for operations.
+     * @param appKey     Finicity appKey.
+     * @param token      Finicity authentication token.
+     */
     public DefaultInstitutionOperations(RestClient restClient, String appKey, Token token) {
         super(restClient, appKey, token);
     }

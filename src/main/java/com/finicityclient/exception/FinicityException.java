@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,8 +23,10 @@
 
 package com.finicityclient.exception;
 
+import com.finicityclient.FinicityClient;
+
 /**
- * Root exception for FinicityClient interactions
+ * Root exception for {@link FinicityClient} interactions
  */
 public abstract class FinicityException extends RuntimeException {
     /**

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,11 +23,26 @@
 
 package com.finicityclient.component.rest;
 
+/**
+ * A parameter for the {@link RestClient}.
+ */
 public class Parameter {
+    /**
+     * Name of the field.
+     */
     private final String name;
 
+    /**
+     * Value of the field.
+     */
     private final String value;
 
+    /**
+     * Construct a parameter.
+     *
+     * @param name  Name of the field.
+     * @param value Value of the field.
+     */
     public Parameter(String name, String value) {
         this.name = name;
         this.value = value;

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,10 +23,10 @@
 
 package com.finicityclient.operation;
 
-import com.finicityclient.component.rest.Response;
-import com.finicityclient.type.*;
 import com.finicityclient.component.Token;
+import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
+import com.finicityclient.type.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,10 +34,22 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Default implementation of {@link AccountOperations}.
+ */
 public class DefaultAccountOperations extends DefaultOperations implements AccountOperations {
-
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DefaultAccountOperations.class));
 
+    /**
+     * Construct a client for Account operations.
+     *
+     * @param restClient A REST client for operations.
+     * @param appKey     Finicity appKey.
+     * @param token      Finicity authentication token.
+     */
     public DefaultAccountOperations(RestClient restClient, String appKey, Token token) {
         super(restClient, appKey, token);
     }

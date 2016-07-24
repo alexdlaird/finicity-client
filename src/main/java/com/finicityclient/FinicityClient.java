@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,19 +23,19 @@
 
 package com.finicityclient;
 
-import com.finicityclient.operation.*;
 import com.finicityclient.component.rest.RestClient;
+import com.finicityclient.operation.*;
 
 /**
  * A client for interacting with the <a href="https://developer.finicity.com/admin/docs">Finicity API</a>.
- *
+ * <p>
  * An implementation of this interace must handle token management, documented <a href="https://finicity.zendesk.com/hc/en-us/articles/201702709-Partners">here</a>).
  * A token should only be requested every 90 minutes, so the retrieved token should be stored for resuse on subsequent
  * calls until expiration.
- *
+ * <p>
  * Any Operations classes may throw a {@link RestClient.RestClientTokenExpiredException}. Check for and catch this
- * exception with each API call. If seen, simply refresh the token and retry. To refresh the token, call
- * {@link #refreshToken()}, which will handle retrieving a new token and updating it accordingly implementations.
+ * exception with each API call. If seen, simply refresh the token and retry. To refresh the token, call {@link
+ * #refreshToken()}, which will handle retrieving a new token and updating it accordingly implementations.
  */
 public interface FinicityClient {
     /**

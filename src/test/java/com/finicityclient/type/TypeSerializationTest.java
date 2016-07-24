@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -55,11 +55,8 @@ public class TypeSerializationTest {
                 "      <lastUpdatedDate>1422467353</lastUpdatedDate>\n" +
                 "   </account>\n" +
                 "</accounts>";
-        Accounts obj = serializer.read(Accounts.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, Accounts.class);
     }
 
     @Test
@@ -87,11 +84,7 @@ public class TypeSerializationTest {
                 "   </credentials>\n" +
                 "</accounts>";
 
-        AccountLoginForm obj = serializer.read(AccountLoginForm.class, xml);
-
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, AccountLoginForm.class);
     }
 
     @Test
@@ -107,11 +100,7 @@ public class TypeSerializationTest {
                 "   </mfaChallenges>\n" +
                 "</accounts>";
 
-        AccountMfaChallenge obj = serializer.read(AccountMfaChallenge.class, xml);
-
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, AccountMfaChallenge.class);
     }
 
     @Test
@@ -125,11 +114,7 @@ public class TypeSerializationTest {
                 "   </questions>\n" +
                 "</mfaChallenges>";
 
-        MfaChallengeRequest obj = serializer.read(MfaChallengeRequest.class, xml);
-
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, MfaChallengeRequest.class);
     }
 
     @Test
@@ -144,11 +129,8 @@ public class TypeSerializationTest {
                 "      <createdDate>1412792539</createdDate>\n" +
                 "   </customer>\n" +
                 "</customers>";
-        Customers obj = serializer.read(Customers.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, Customers.class);
     }
 
     @Test
@@ -174,11 +156,8 @@ public class TypeSerializationTest {
                 "      </address>\n" +
                 "   </institution>\n" +
                 "</institutions>";
-        Institutions obj = serializer.read(Institutions.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, Institutions.class);
     }
 
     @Test
@@ -225,11 +204,7 @@ public class TypeSerializationTest {
                 "   </loginForm>\n" +
                 "</institutionDetails>";
 
-        InstitutionDetails obj = serializer.read(InstitutionDetails.class, xml);
-
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, InstitutionDetails.class);
     }
 
     @Test
@@ -237,11 +212,8 @@ public class TypeSerializationTest {
         String xml = "<access>\n" +
                 "   <token>ACCESS_TOKEN</token>\n" +
                 "</access>";
-        PartnerAccess obj = serializer.read(PartnerAccess.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, PartnerAccess.class);
     }
 
     @Test
@@ -275,11 +247,8 @@ public class TypeSerializationTest {
                 "      </categorization>\n" +
                 "   </transaction>\n" +
                 "</transactions>";
-        Transactions obj = serializer.read(Transactions.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, Transactions.class);
     }
 
     @Test
@@ -291,11 +260,8 @@ public class TypeSerializationTest {
                 "      </question>\n" +
                 "   </questions>\n" +
                 "</mfaChallenges>";
-        MfaChallenges obj = serializer.read(MfaChallenges.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, MfaChallenges.class);
     }
 
     @Test
@@ -308,11 +274,8 @@ public class TypeSerializationTest {
                 "      </question>\n" +
                 "   </questions>\n" +
                 "</mfaChallenges>";
-        MfaChallenges obj = serializer.read(MfaChallenges.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, MfaChallenges.class);
     }
 
     @Test
@@ -327,11 +290,8 @@ public class TypeSerializationTest {
                 "      </question>\n" +
                 "   </questions>\n" +
                 "</mfaChallenges>";
-        MfaChallenges obj = serializer.read(MfaChallenges.class, xml);
 
-        StringWriter writer = new StringWriter();
-        serializer.write(obj, writer);
-        assertEquals(xml, writer.toString());
+        verifySerializationAndDeserialization(xml, MfaChallenges.class);
     }
 
     @Test
@@ -347,7 +307,12 @@ public class TypeSerializationTest {
                 "      </question>\n" +
                 "   </questions>\n" +
                 "</mfaChallenges>";
-        MfaChallenges obj = serializer.read(MfaChallenges.class, xml);
+
+        verifySerializationAndDeserialization(xml, MfaChallenges.class);
+    }
+
+    private <T> void verifySerializationAndDeserialization(String xml, Class<T> type) throws Exception {
+        Object obj = serializer.read(type, xml);
 
         StringWriter writer = new StringWriter();
         serializer.write(obj, writer);
