@@ -26,8 +26,8 @@ package com.finicityclient.operation;
 import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
-import com.finicityclient.type.Credentials;
-import com.finicityclient.type.PartnerAccess;
+import com.finicityclient.type.partner.Credentials;
+import com.finicityclient.type.partner.PartnerAccess;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

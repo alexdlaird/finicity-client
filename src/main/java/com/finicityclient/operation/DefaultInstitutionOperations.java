@@ -28,10 +28,10 @@ import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.Parameter;
 import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
-import com.finicityclient.type.Institution;
-import com.finicityclient.type.InstitutionDetails;
-import com.finicityclient.type.Institutions;
-import com.finicityclient.type.LoginForm;
+import com.finicityclient.type.institution.Institution;
+import com.finicityclient.type.institution.InstitutionDetails;
+import com.finicityclient.type.institution.Institutions;
+import com.finicityclient.type.institution.LoginForm;
 
 import java.util.ArrayList;
 import java.util.List;

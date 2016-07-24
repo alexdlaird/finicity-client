@@ -24,6 +24,12 @@
 package com.finicityclient.type;
 
 import com.finicityclient.component.FinicityPersister;
+import com.finicityclient.type.account.*;
+import com.finicityclient.type.customer.Customers;
+import com.finicityclient.type.institution.InstitutionDetails;
+import com.finicityclient.type.institution.Institutions;
+import com.finicityclient.type.partner.PartnerAccess;
+import com.finicityclient.type.transaction.Transactions;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 

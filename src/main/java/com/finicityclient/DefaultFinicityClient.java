@@ -27,7 +27,7 @@ import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.DefaultRestClient;
 import com.finicityclient.component.rest.RestClient;
 import com.finicityclient.operation.*;
-import com.finicityclient.type.PartnerAccess;
+import com.finicityclient.type.partner.PartnerAccess;
 
 /**
  * The default implementation of a {@link FinicityClient}, which instantiates default Operations clients and implements

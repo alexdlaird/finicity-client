@@ -24,8 +24,8 @@
 package com.finicityclient.operation;
 
 import com.finicityclient.exception.FinicityException;
-import com.finicityclient.type.Customer;
-import com.finicityclient.type.CustomerType;
+import com.finicityclient.type.customer.Customer;
+import com.finicityclient.type.customer.CustomerType;
 
 import java.util.List;
 

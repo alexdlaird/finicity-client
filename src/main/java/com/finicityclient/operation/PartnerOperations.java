@@ -19,8 +19,8 @@ package com.finicityclient.operation;
 
 import com.finicityclient.FinicityClient;
 import com.finicityclient.exception.FinicityException;
-import com.finicityclient.type.Credentials;
-import com.finicityclient.type.PartnerAccess;
+import com.finicityclient.type.partner.Credentials;
+import com.finicityclient.type.partner.PartnerAccess;
 
 /**
  * Interface for Partner operations, the API for which can be found <a href="https://developer.finicity.com/admin/docs/#/partners">here</a>.

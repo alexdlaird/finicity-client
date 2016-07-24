@@ -28,9 +28,9 @@ import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.Parameter;
 import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
-import com.finicityclient.type.Customer;
-import com.finicityclient.type.CustomerType;
-import com.finicityclient.type.Customers;
+import com.finicityclient.type.customer.Customer;
+import com.finicityclient.type.customer.CustomerType;
+import com.finicityclient.type.customer.Customers;
 
 import java.util.ArrayList;
 import java.util.List;
