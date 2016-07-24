@@ -51,7 +51,7 @@ task coverage(dependsOn: [jacocoTestReport]) {
 }
 coverage.mustRunAfter test
 
-task buildAll(dependsOn: [build, test, coverage, javadoc]) {
+task buildAll(dependsOn: [build, test, coverage, javadoc, jar]) {
     group = 'Verification'
     description = 'Verification to run before building'
 }
