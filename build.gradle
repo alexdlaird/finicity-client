@@ -2,8 +2,8 @@ apply plugin: 'application'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
 
-def projectGroup = 'com.budgetly'
-def projectArtifactId = 'finicity-client'
+def projectGroup = 'com.finicityclient'
+def projectArtifactId = 'finicityclient'
 def projectVersion = '1.0.0-SNAPSHOT'
 
 mainClassName = 'com.finicityclient.DefaultFinicityClient'
