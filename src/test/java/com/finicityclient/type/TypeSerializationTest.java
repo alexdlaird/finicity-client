@@ -30,6 +30,7 @@ import com.finicityclient.type.institution.InstitutionDetails;
 import com.finicityclient.type.institution.Institutions;
 import com.finicityclient.type.partner.PartnerAccess;
 import com.finicityclient.type.transaction.Transactions;
+import com.finicityclient.type.tx_push.Subscriptions;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 
@@ -316,6 +317,29 @@ public class TypeSerializationTest {
 
         verifySerializationAndDeserialization(xml, MfaChallenges.class);
     }
+
+    @Test
+    public void testSubscriptionsSerialization() throws Exception {
+        String xml = "<subscriptions>\n" +
+                "   <subscription>\n" +
+                "      <id>7462</id>\n" +
+                "      <accountId>2055</accountId>\n" +
+                "      <type>account</type>\n" +
+                "      <callbackUrl>https://www.mydomain.com/txpush/listener</callbackUrl>\n" +
+                "      <signingKey>zg4U0v1IvTzFEHIXzJMxPHnfUwWZAMVpXrUuNuL9IvZI0QzkDdwp39IAKuNOFxOVqCOgHLMS1Zpe4ZL40NX83aJkqI6v0Ez5B7BLBtvr7Ag11kPH3uG1taTeOV0CTyI4LOg7ohSHn0DqaRu2aBq26KI90nYe0CecTCzzhu4yMXL43JV8YfydAexNdkzfg8tY44MlhBPUh2neHW2EFTT2ja4s4Ul10JgID03un8WBSrIm2adHw3QYJB4jk4k1e</signingKey>\n" +
+                "   </subscription>\n" +
+                "   <subscription>\n" +
+                "      <id>7463</id>\n" +
+                "      <accountId>2055</accountId>\n" +
+                "      <type>transaction</type>\n" +
+                "      <callbackUrl>https://www.mydomain.com/txpush/listener</callbackUrl>\n" +
+                "      <signingKey>zg4U0v1IvTzFEHIXzJMxPHnfUwWZAMVpXrUuNuL9IvZI0QzkDdwp39IAKuNOFxOVqCOgHLMS1Zp7aZL40NX8ekJkqI6v0Ez5B7BLBtvr7Ag11kPH3uG1taTeOV0CTyI4LOg7ohSHn0DqaRu2aBq26KI90nYe0CecTCzzhu4yMXL43JV8YfydAexNdkzfg8tY44MlhBPUh2neHW2EFTT2ja4s4Ul10JgID03un8WBSrIm2adHw3QYJB6K84k1e</signingKey>\n" +
+                "   </subscription>\n" +
+                "</subscriptions>";
+
+        verifySerializationAndDeserialization(xml, Subscriptions.class);
+    }
+
 
     private <T> void verifySerializationAndDeserialization(String xml, Class<T> type) throws Exception {
         Object obj = serializer.read(type, xml);
