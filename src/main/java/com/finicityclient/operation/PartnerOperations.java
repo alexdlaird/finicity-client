@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -19,27 +19,54 @@ package com.finicityclient.operation;
 
 import com.finicityclient.FinicityClient;
 import com.finicityclient.exception.FinicityException;
+import com.finicityclient.type.Credentials;
 import com.finicityclient.type.PartnerAccess;
 
+/**
+ * Interface for Partner operations, the API for which can be found <a href="https://developer.finicity.com/admin/docs/#/partners">here</a>.
+ */
 public interface PartnerOperations {
     /**
-     * Validate the partner’s credentials (Finicity-App-Key, Partner ID, and Partner Secret) and return a temporary access token. The token must be passed in the HTTP header Finicity-App-Token on all subsequent API requests (see <a href="https://finicity.zendesk.com/hc/en-us/articles/202460715-Accessing-the-API">Accessing the API</a>). This token is valid for two hours, after which the partner must call Partner Authentication again to obtain a new token.
-     *
-     * Ten unsuccessful attempts will cause the partner’s account to be locked. To unlock the account, send an email to <a href="mailto:support@finicity.com"></a>Finicity Support.
-     *
+     * Validate the partner’s credentials (Finicity-App-Key, Partner ID, and Partner Secret) and return a temporary
+     * access token. The token must be passed in the HTTP header Finicity-App-Token on all subsequent API requests (see
+     * <a href="https://finicity.zendesk.com/hc/en-us/articles/202460715-Accessing-the-API">Accessing the API</a>). This
+     * token is valid for two hours, after which the partner must call Partner Authentication again to obtain a new
+     * token.
+     * <p>
+     * Ten unsuccessful attempts will cause the partner’s account to be locked. To unlock the account, send an email to
+     * <a href="mailto:support@finicity.com"></a>Finicity Support.
+     * <p>
      * Success: HTTP 200 (OK)
-     *
+     * <p>
      * Though this function is documented in the interface and publically accessible, token management should be done by
      * the {@link FinicityClient} and Operations classes to ensure this method is called as infrequently as possible.
      * Retrieving a token too often or having too many active tokens at the same may cause you to fall into ill favor
      * with Finicity.
      *
      * @return An object with a temporary access token
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     PartnerAccess authentication();
 
-    class PartnerOperationsException extends RuntimeException {
+    /**
+     * Change the partner secret that is used to authenticate this partner. The secret does not expire, but can be
+     * changed by calling Modify Partner Secret. A valid partner secret MUST include at least one number and at least
+     * one letter, and its length MUST be between 12 and 255 characters. It MAY contain upper- and lowercase characters,
+     * numbers, and the characters with !,@,#,$,%,&#x26;,*,_,-,+.
+     * <p>
+     * Success: HTTP 204 (No Content)
+     *
+     * @param credentials PARTNER_ID: Partner ID from Developer Portal. PARTNER_SECRET: Partner Secret from Developer
+     *                    Portal. NEW_PARTNER_SECRET: New value for Partner Secret.
+     * @throws FinicityException An error occurred when interaction with the API
+     */
+    void modifyPartnerSecret(Credentials credentials);
+
+    /**
+     * An error has occurred when processing an operation in {@link PartnerOperations}.
+     */
+    class PartnerOperationsException extends FinicityException {
         public PartnerOperationsException(String msg, Exception cause) {
             super(msg, cause);
         }

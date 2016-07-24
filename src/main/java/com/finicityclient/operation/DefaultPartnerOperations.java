@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,39 +23,57 @@
 
 package com.finicityclient.operation;
 
-import com.finicityclient.component.rest.Body;
+import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.Response;
-import com.finicityclient.type.PartnerAccess;
-import com.finicityclient.component.FinicityPersister;
 import com.finicityclient.component.rest.RestClient;
+import com.finicityclient.type.Credentials;
 import com.finicityclient.type.PartnerAccess;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-import org.simpleframework.xml.Serializer;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DefaultPartnerOperations implements PartnerOperations {
-
+/**
+ * Default implementation of {@link PartnerOperations}.
+ */
+public class DefaultPartnerOperations extends DefaultOperations implements PartnerOperations {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DefaultPartnerOperations.class));
 
-    protected final Serializer serializer = new FinicityPersister();
-
-    private final RestClient restClient;
-
-    private final String appKey;
-
+    /**
+     * Finicity partnerId.
+     */
     private final String partnerId;
 
+    /**
+     * Finicity partnerSecret.
+     */
     private final String partnerSecret;
 
+    /**
+     * Construct a client for Partner operations.
+     *
+     * @param restClient    A REST client for operations.
+     * @param appKey        Finicity appKey.
+     * @param partnerId     Finicity partnerId.
+     * @param partnerSecret Finicity partnerSecret.
+     */
     public DefaultPartnerOperations(RestClient restClient, String appKey, String partnerId, String partnerSecret) {
-        this.restClient = restClient;
+        super(restClient, appKey, null);
 
-        this.appKey = appKey;
         this.partnerId = partnerId;
         this.partnerSecret = partnerSecret;
+    }
+
+    /**
+     * {@link PartnerOperations} does not use or implement the authentication {@link Token token}.
+     *
+     * @param token Unused.
+     */
+    @Override
+    public void refreshToken(Token token) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -78,28 +96,15 @@ public class DefaultPartnerOperations implements PartnerOperations {
         }
     }
 
-    @Root
-    public static class Credentials implements Body {
-        @Element
-        private String partnerId;
+    @Override
+    public void modifyPartnerSecret(Credentials credentials) {
+        Response response = restClient.executePut("/v2/partners/authentication",
+                credentials,
+                null,
+                null);
 
-        @Element
-        private String partnerSecret;
-
-        public Credentials() {
-        }
-
-        public Credentials(String partnerId, String partnerSecret) {
-            this.partnerId = partnerId;
-            this.partnerSecret = partnerSecret;
-        }
-
-        public String getPartnerId() {
-            return partnerId;
-        }
-
-        public String getPartnerSecret() {
-            return partnerSecret;
+        if (response.getStatusCode() != 204) {
+            throw new PartnerOperations.PartnerOperationsException("Invalid response: " + response.getStatusCode() + ", " + response.getBody());
         }
     }
 }

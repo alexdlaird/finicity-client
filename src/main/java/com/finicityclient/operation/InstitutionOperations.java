@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -30,56 +30,70 @@ import com.finicityclient.type.LoginForm;
 
 import java.util.List;
 
+/**
+ * Interface for Institution operations, the API for which can be found <a href="https://developer.finicity.com/admin/docs/#/institutions">here</a>.
+ */
 public interface InstitutionOperations {
     /**
-     * Return all financial institutions that contain the search text in the institution’s &lt;name&gt;, &lt;urlHomeApp&gt;, or &lt;urlLogonApp&gt; fields. Return all institutions if no query parameters are provided or if the search string is a single asterisk *.
-     *
-     * See <a href="https://finicity.zendesk.com/hc/en-us/articles/202460545">Handling Spaces in Queries</a> to search for multiple words.
-     *
+     * Return all financial institutions that contain the search text in the institution’s &lt;name&gt;,
+     * &lt;urlHomeApp&gt;, or &lt;urlLogonApp&gt; fields. Return all institutions if no query parameters are provided or
+     * if the search string is a single asterisk *.
+     * <p>
+     * See <a href="https://finicity.zendesk.com/hc/en-us/articles/202460545">Handling Spaces in Queries</a> to search
+     * for multiple words.
+     * <p>
      * Success: HTTP 200 (OK)
      *
      * @param search Query: Text to match, or * to return all supported institutions
      * @param start  Query: Starting index for this page of results (default is 1, ignored if search=*)
      * @param limit  Query: Maximum number of entries for this page of results (default is 25, ignored if search=*)
      * @return An institution matching the query
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     List<Institution> getInstitutions(String search, Integer start, Integer limit);
 
     /**
      * Get details for the specified institution.
-     *
+     * <p>
      * Success: HTTP 200 (OK)
      *
      * @param institutionId (required) ID of the institution
      * @return An institution matching the ID given.
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     Institution getInstitution(String institutionId);
 
     /**
      * Get expanded details (including address information and loginForm) for the specified institution.
-     *
+     * <p>
      * Success: HTTP 200 (OK)
      *
      * @param institutionId (required) ID of the institution
      * @return Details for the institution matching the ID given.
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     InstitutionDetails getInstitutionDetails(String institutionId);
 
     /**
-     * Get the login form fields required for Discover Customer Accounts. The form is typically displayed to a customer to obtain credentials to access the customer's accounts at this institution.
-     *
+     * Get the login form fields required for Discover Customer Accounts. The form is typically displayed to a customer
+     * to obtain credentials to access the customer's accounts at this institution.
+     * <p>
      * Success: HTTP 200 (OK)
      *
      * @param institutionId (required) ID of the institution
      * @return The login form fields for the institution matching the ID given.
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     LoginForm getInstitutionLoginForm(String institutionId);
 
-    class InstitutionOperationsException extends RuntimeException {
+    /**
+     * An error has occurred when processing an operation in {@link InstitutionOperations}.
+     */
+    class InstitutionOperationsException extends FinicityException {
         public InstitutionOperationsException(String msg, Exception cause) {
             super(msg, cause);
         }

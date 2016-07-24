@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,5 +23,9 @@
 
 package com.finicityclient.component.rest;
 
+/**
+ * Any {@link com.finicityclient.type type} that can be serialized as XML and passed to the {@link RestClient} as a
+ * request body.
+ */
 public interface Body {
 }

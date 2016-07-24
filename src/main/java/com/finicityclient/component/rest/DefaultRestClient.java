@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -40,32 +40,62 @@ import java.util.logging.Logger;
 
 /**
  * The default implementation of a {@link RestClient}.
- *
+ * <p>
  * Each request has the "Finicity-App-Key" header added to it with the appKey. If a token exists, the
  * "Finicity-App-Token" header is also set with that value.
- *
+ * <p>
  * If no body is given, the "Content-Length" header is set to 0.
  */
 public class DefaultRestClient implements RestClient {
+    /**
+     * Logger.
+     */
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DefaultRestClient.class));
 
+    /**
+     * Base URL for the Finicity API.
+     */
     private static final String BASE_URL = "https://api.finicity.com/aggregation";
 
-    private final Serializer serializer = new FinicityPersister();
+    /**
+     * Serializer for parsing requests and responses.
+     */
+    private final Serializer serializer;
 
+    /**
+     * Finicity appKey.
+     */
     private final String appKey;
 
+    /**
+     * Default encoding for requests.
+     */
     private String encoding;
 
+    /**
+     * Default contentType header for requests.
+     */
     private String contentType;
 
+    /**
+     * Finicity authentication token.
+     */
     private Token token = null;
 
+    /**
+     * Construct a default client that can perform basic REST operations.
+     *
+     * @param appKey      Finicity appKey.
+     * @param encoding    Default encoding for the client.
+     * @param contentType Default contentType header for the client.
+     */
     public DefaultRestClient(String appKey, String encoding, String contentType) {
         this.appKey = appKey;
 
         this.encoding = encoding;
         this.contentType = contentType;
+
+        this.serializer = createSerializer();
     }
 
     private void ensureTokenIsValid() {
@@ -84,6 +114,11 @@ public class DefaultRestClient implements RestClient {
         }
     }
 
+    /**
+     * Update this client's authentication token.
+     *
+     * @param token The token to be updated.
+     */
     public void refreshToken(Token token) {
         this.token = token;
     }
@@ -170,18 +205,11 @@ public class DefaultRestClient implements RestClient {
         InputStream inputStream = null;
 
         try {
-            httpUrlConnection = (HttpURLConnection) new URL(url).openConnection();
+            httpUrlConnection = createHttpUrlConnection(url);
             httpUrlConnection.setRequestMethod(method);
-            httpUrlConnection.setRequestProperty("Content-Type", contentType);
-            httpUrlConnection.setRequestProperty("Finicity-App-Key", appKey);
-            if (token != null) {
-                httpUrlConnection.setRequestProperty("Finicity-App-Token", token.getToken());
-            }
-            if (additionalHeaders != null) {
-                for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
-                    httpUrlConnection.setRequestProperty(entry.getKey(), entry.getValue());
-                }
-            }
+
+            appendFinicityDefaultsToConnection(httpUrlConnection, additionalHeaders);
+            modifyConnection(httpUrlConnection);
 
             if (StringUtils.isNotBlank(body)) {
                 httpUrlConnection.setDoOutput(true);
@@ -228,10 +256,66 @@ public class DefaultRestClient implements RestClient {
         }
     }
 
+    private void appendFinicityDefaultsToConnection(HttpURLConnection httpUrlConnection, Map<String, String> additionalHeaders) {
+        httpUrlConnection.setRequestProperty("Content-Type", contentType);
+        httpUrlConnection.setRequestProperty("Finicity-App-Key", appKey);
+        if (token != null) {
+            httpUrlConnection.setRequestProperty("Finicity-App-Token", token.getToken());
+        }
+        if (additionalHeaders != null) {
+            for (Map.Entry<String, String> entry : additionalHeaders.entrySet()) {
+                httpUrlConnection.setRequestProperty(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    /**
+     * Override this method if you would like to implement a custom {@link Serializer}. If so, it is recommended you
+     * extend {@link FinicityPersister}, as that properly handles Finicity enums.
+     *
+     * @return A {@link FinicityPersister} instance of a {@link Serializer}.
+     */
+    protected FinicityPersister createSerializer() {
+        return new FinicityPersister();
+    }
+
+    /**
+     * Override this method if you could like to extend {@link DefaultRestClient} and perform customer HTTP operations
+     * before {@link HttpURLConnection#connect()} is called on the instance of the passed in connection.
+     *
+     * @param httpUrlConnection The URL connection to modify.
+     */
+    protected void modifyConnection(HttpURLConnection httpUrlConnection) {
+    }
+
+    /**
+     * Override this method if you could like to implement a custom URL connection.
+     *
+     * @param url The URL to connect to.
+     * @return A URL connection.
+     *
+     * @throws IOException An I/O exception has occurred.
+     */
+    protected HttpURLConnection createHttpUrlConnection(String url) throws IOException {
+        return (HttpURLConnection) new URL(url).openConnection();
+    }
+
+    /**
+     * Set the default encoding. If this is only meant to modify the encoding for the next call (and no others), be sure
+     * to set the encoding back to the default after the call has been executed.
+     *
+     * @param encoding The encoding string to set.
+     */
     public void setEncoding(String encoding) {
         this.encoding = encoding;
     }
 
+    /**
+     * Set the content type. If this is only meant to modify the content type for the next call (and no others), be sure
+     * to set the encoding back to the default after the call has been executed.
+     *
+     * @param contentType The content type string to set.
+     */
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }

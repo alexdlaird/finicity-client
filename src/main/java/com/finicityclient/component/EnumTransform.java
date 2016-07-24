@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,8 +23,12 @@
 
 package com.finicityclient.component;
 
+import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.Transform;
 
+/**
+ * Handles Enum transformation, which can be used by a {@link Persister} implementation.
+ */
 public class EnumTransform implements Transform<Enum> {
     private final Class type;
 
@@ -32,6 +36,7 @@ public class EnumTransform implements Transform<Enum> {
         this.type = type;
     }
 
+    @Override
     public Enum read(String value) throws Exception {
         for (Object o : type.getEnumConstants()) {
             if (o.toString().equals(value)) {
@@ -41,6 +46,7 @@ public class EnumTransform implements Transform<Enum> {
         return null;
     }
 
+    @Override
     public String write(Enum value) throws Exception {
         return value.toString();
     }

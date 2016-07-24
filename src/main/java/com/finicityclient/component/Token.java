@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -23,11 +23,26 @@
 
 package com.finicityclient.component;
 
+/**
+ * Finicity authentication token details.
+ */
 public class Token {
+    /**
+     * Finicity authentication token.
+     */
     private final String token;
 
+    /**
+     * Token expiration.
+     */
     private final long expiration;
 
+    /**
+     * Construct a Finicity authentication token.
+     *
+     * @param token      Finicity authentication token.
+     * @param expiration When it should be considered expired.
+     */
     public Token(String token, long expiration) {
         this.token = token;
         this.expiration = expiration;

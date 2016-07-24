@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright (c) 2016 Alex Laird
  *
  * Permission is hereby granted, free of charge, to any person obtaining
@@ -27,6 +27,9 @@ import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.Matcher;
 import org.simpleframework.xml.transform.Transform;
 
+/**
+ * Extends {@link Persister} and adds Enum functionality based off of the {@link EnumTransform} implementation.
+ */
 public class FinicityPersister extends Persister {
     public FinicityPersister() {
         super(new Matcher() {

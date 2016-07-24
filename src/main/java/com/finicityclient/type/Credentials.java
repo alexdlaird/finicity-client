@@ -24,34 +24,30 @@
 package com.finicityclient.type;
 
 import com.finicityclient.component.rest.Body;
-import org.simpleframework.xml.Attribute;
-import org.simpleframework.xml.ElementList;
+import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
-import java.util.List;
+@Root
+public class Credentials implements Body {
+    @Element
+    private String partnerId;
 
-@Root(strict = false)
-public class Accounts implements Body {
-    @Attribute(required = false)
-    private int found;
+    @Element
+    private String partnerSecret;
 
-    @Attribute(required = false)
-    private int displaying;
-
-    @Attribute(required = false)
-    private boolean moreAvailable;
-
-    @ElementList(inline = true, required = false, empty = false)
-    private List<Account> accounts;
-
-    public Accounts() {
+    public Credentials() {
     }
 
-    public Accounts(List<Account> accounts) {
-        this.accounts = accounts;
+    public Credentials(String partnerId, String partnerSecret) {
+        this.partnerId = partnerId;
+        this.partnerSecret = partnerSecret;
     }
 
-    public List<Account> getAccounts() {
-        return accounts;
+    public String getPartnerId() {
+        return partnerId;
+    }
+
+    public String getPartnerSecret() {
+        return partnerSecret;
     }
 }
