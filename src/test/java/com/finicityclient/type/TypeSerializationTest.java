@@ -23,9 +23,7 @@
 
 package com.finicityclient.type;
 
-import com.finicityclient.type.component.FinicityPersister;
-import com.finicityclient.type.type.*;
-import org.junit.Ignore;
+import com.finicityclient.component.FinicityPersister;
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 
