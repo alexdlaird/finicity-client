@@ -1,10 +1,73 @@
 apply plugin: 'application'
 apply plugin: 'idea'
 apply plugin: 'jacoco'
+apply plugin: 'maven'
+apply plugin: 'signing'
 
 def projectGroup = 'com.finicityclient'
 def projectArtifactId = 'finicityclient'
 def projectVersion = '1.0.0-SNAPSHOT'
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
+            pom.project {
+                name 'Finicity Client'
+                packaging 'jar'
+                description 'This is a Java Finicity Client library for communicating with the Finicity API'
+                url 'https://github.com/alexdlaird/finicity-client'
+
+                scm {
+                    url 'scm:git@github.com:alexdlaird/finicity-client.git'
+                    connection 'scm:git@github.com:alexdlaird/finicity-client.git'
+                    developerConnection 'scm:git@github.com:alexdlaird/finicity-client.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'https://github.com/alexdlaird/finicity-client/blob/master/LICENSE'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'alexdlaird'
+                        name 'Alex Laird'
+                    }
+                }
+            }
+        }
+    }
+}
 
 mainClassName = 'com.finicityclient.DefaultFinicityClient'
 jar {
@@ -51,7 +114,7 @@ task coverage(dependsOn: [jacocoTestReport]) {
 }
 coverage.mustRunAfter test
 
-task buildAll(dependsOn: [build, test, coverage, javadoc, jar]) {
+task buildAll(dependsOn: [test, coverage, javadoc, jar]) {
     group = 'Verification'
     description = 'Verification to run before building'
 }
