@@ -26,7 +26,8 @@ package com.finicityclient.operation;
 import com.finicityclient.component.Token;
 import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
-import com.finicityclient.type.*;
+import com.finicityclient.type.account.*;
+import com.finicityclient.type.institution.LoginForm;
 
 import java.util.HashMap;
 import java.util.List;

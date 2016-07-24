@@ -24,9 +24,9 @@
 package com.finicityclient.operation;
 
 import com.finicityclient.exception.FinicityException;
-import com.finicityclient.type.Institution;
-import com.finicityclient.type.InstitutionDetails;
-import com.finicityclient.type.LoginForm;
+import com.finicityclient.type.institution.Institution;
+import com.finicityclient.type.institution.InstitutionDetails;
+import com.finicityclient.type.institution.LoginForm;
 
 import java.util.List;
 

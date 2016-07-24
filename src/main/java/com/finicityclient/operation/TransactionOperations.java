@@ -19,7 +19,7 @@ package com.finicityclient.operation;
 
 import com.finicityclient.exception.FinicityException;
 import com.finicityclient.type.Sort;
-import com.finicityclient.type.Transaction;
+import com.finicityclient.type.transaction.Transaction;
 
 import java.util.List;
 

@@ -28,8 +28,8 @@ import com.finicityclient.component.rest.Parameter;
 import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
 import com.finicityclient.type.Sort;
-import com.finicityclient.type.Transaction;
-import com.finicityclient.type.Transactions;
+import com.finicityclient.type.transaction.Transaction;
+import com.finicityclient.type.transaction.Transactions;
 
 import java.util.ArrayList;
 import java.util.List;

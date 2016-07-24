@@ -18,7 +18,10 @@
 package com.finicityclient.operation;
 
 import com.finicityclient.exception.FinicityException;
-import com.finicityclient.type.*;
+import com.finicityclient.type.account.*;
+import com.finicityclient.type.customer.Customer;
+import com.finicityclient.type.institution.Institution;
+import com.finicityclient.type.institution.LoginForm;
 
 import java.util.List;
 
