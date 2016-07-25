@@ -29,12 +29,14 @@ available Accounts (with MFA) for the test Institution (per this [Finicity tutor
 String testInstitutionId = "101732";
 
 // Get your API credentials from https://developer.finicity.com/admin
-Customer customer = new Customer("alexdlaird-tester4",
-        "Alex",
-        "Laird");
+Customer customer = new Customer("test-username",
+        "First Name",
+        "Last Name");
 customer = finicityClient.getCustomerOperations().addTestingCustomer(customer);
-InstitutionDetails institutionDetails = finicityClient.getInstitutionOperations().getInstitutionDetails("101732");
+InstitutionDetails institutionDetails = finicityClient.getInstitutionOperations().getInstitutionDetails(testInstitutionId);
 
+// Build an authentication form with details from Finicity's tutorial; try different authentication schemes by using
+// different values from the tutorial at https://finicity.zendesk.com/hc/en-us/articles/201750869-Testing-Accounts
 LoginForm loginForm = institutionDetails.getLoginForm();
 loginForm.getLoginField().get(0).setValue("tfa_text");
 loginForm.getLoginField().get(1).setValue("go");
@@ -42,7 +44,7 @@ AccountLoginForm accountLoginForm = new AccountLoginForm(loginForm);
 
 // Attempt to add the Accounts, you will get MFA challenges back
 accountResponses = finicityClient.getAccountOperations().addAllAccounts(customer.getId(),
-        "101732",
+        testInstitutionId,
         accountLoginForm);
 
 // Ideally you'd loop here (as there may be more than one set of MFA challenges), but for test Accounts, we know there
@@ -60,7 +62,7 @@ if (accountResponses.size() > 0 &&
     // Readd the Accounts with MFA authentication answers
     accountResponses = finicityClient.getAccountOperations().addAllAccountsMfa(mfaChallengeResponse.getSession(),
             customer.getId(),
-            "101732",
+            testInstitutionId,
             accountMfaChallenge);
 }
 
