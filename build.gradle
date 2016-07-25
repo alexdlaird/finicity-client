@@ -57,7 +57,7 @@ uploadArchives {
                 url 'https://github.com/alexdlaird/finicity-client'
 
                 scm {
-                    url 'scm:git@github.com:alexdlaird/finicity-client.git'
+                    url 'http://github.com/alexdlaird/finicity-client'
                     connection 'scm:git@github.com:alexdlaird/finicity-client.git'
                     developerConnection 'scm:git@github.com:alexdlaird/finicity-client.git'
                 }
