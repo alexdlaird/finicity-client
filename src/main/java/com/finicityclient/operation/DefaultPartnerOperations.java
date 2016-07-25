@@ -24,6 +24,7 @@
 package com.finicityclient.operation;
 
 import com.finicityclient.component.Token;
+import com.finicityclient.component.rest.Body;
 import com.finicityclient.component.rest.Response;
 import com.finicityclient.component.rest.RestClient;
 import com.finicityclient.type.partner.Credentials;
@@ -78,8 +79,10 @@ public class DefaultPartnerOperations extends DefaultOperations implements Partn
 
     @Override
     public PartnerAccess authentication() {
+        Credentials credentials = new Credentials(partnerId, partnerSecret);
+
         Response response = restClient.executePost("/v2/partners/authentication",
-                new Credentials(partnerId, partnerSecret),
+                credentials,
                 null,
                 null);
 
@@ -97,7 +100,9 @@ public class DefaultPartnerOperations extends DefaultOperations implements Partn
     }
 
     @Override
-    public void modifyPartnerSecret(Credentials credentials) {
+    public void modifyPartnerSecret(String newPartnerSecret) {
+        Credentials credentials = new Credentials(partnerId, partnerSecret, newPartnerSecret);
+
         Response response = restClient.executePut("/v2/partners/authentication",
                 credentials,
                 null,

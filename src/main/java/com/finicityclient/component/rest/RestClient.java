@@ -33,7 +33,7 @@ public interface RestClient {
     /**
      * Perform GET operation against Finicity's API.
      *
-     * @param url               The URL on which to perform the operation.
+     * @param url               The URL relative to the Finicity base URL on which to perform the operation.
      * @param parameters        An arbitrary number of parameters to add to the URL.
      * @param additionalHeaders Additional headers for the request.
      * @return The results of the query.
@@ -43,7 +43,7 @@ public interface RestClient {
     /**
      * Perform POST operation against Finicity's API.
      *
-     * @param url               The URL on which to perform the operation.
+     * @param url               The URL relative to the Finicity base URL on which to perform the operation.
      * @param body              The element to be serialized into the request body.
      * @param parameters        An arbitrary number of parameters to add to the URL.
      * @param additionalHeaders Additional headers for the request.
@@ -54,7 +54,7 @@ public interface RestClient {
     /**
      * Perform PUT operation against Finicity's API.
      *
-     * @param url               The URL on which to perform the operation.
+     * @param url               The URL relative to the Finicity base URL on which to perform the operation.
      * @param body              The element to be serialized into the request body.
      * @param parameters        An arbitrary number of parameters to add to the URL.
      * @param additionalHeaders Additional headers for the request.
@@ -65,7 +65,7 @@ public interface RestClient {
     /**
      * Perform DELETE operation against Finicity's API.
      *
-     * @param url               The URL on which to perform the operation.
+     * @param url               The URL relative to the Finicity base URL on which to perform the operation.
      * @param parameters        An arbitrary number of parameters to add to the URL.
      * @param additionalHeaders Additional headers for the request.
      * @return The results of the query.

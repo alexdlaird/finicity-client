@@ -21,46 +21,38 @@
  * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.finicityclient.type.partner;
+package com.finicityclient.operation;
 
-import com.finicityclient.component.rest.Body;
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
+import com.finicityclient.component.Token;
+import com.finicityclient.component.rest.RestClient;
+import com.finicityclient.fixture.FixtureHelper;
+import org.junit.Test;
 
-@Root
-public class Credentials implements Body {
-    @Element
-    private String partnerId;
+public class DefaultTransactionOperationsTest {
 
-    @Element
-    private String partnerSecret;
+    private final RestClient mockRestClient;
 
-    @Element(required = false)
-    private String newPartnerSecret;
+    private final DefaultTransactionOperations defaultTransactionOperations;
 
-    public Credentials() {
+    public DefaultTransactionOperationsTest() {
+        mockRestClient = FixtureHelper.createMockTransactionRestClient();
+        Token token = FixtureHelper.createToken();
+
+        defaultTransactionOperations = new DefaultTransactionOperations(mockRestClient, "APP_KEY", token);
     }
 
-    public Credentials(String partnerId, String partnerSecret) {
-        this.partnerId = partnerId;
-        this.partnerSecret = partnerSecret;
+    @Test
+    public void testGetTransactions() throws Exception {
+        // TODO: implement test
     }
 
-    public Credentials(String partnerId, String partnerSecret, String newPartnerSecret) {
-        this.partnerId = partnerId;
-        this.partnerSecret = partnerSecret;
-        this.newPartnerSecret = newPartnerSecret;
+    @Test
+    public void testGetAccountTransactions() throws Exception {
+        // TODO: implement test
     }
 
-    public String getPartnerId() {
-        return partnerId;
-    }
-
-    public String getPartnerSecret() {
-        return partnerSecret;
-    }
-
-    public String getNewPartnerSecret() {
-        return newPartnerSecret;
+    @Test
+    public void testGetTransaction() throws Exception {
+        // TODO: implement test
     }
 }

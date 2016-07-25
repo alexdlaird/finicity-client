@@ -63,11 +63,10 @@ public interface PartnerOperations {
      * <p>
      * Success: HTTP 204 (No Content)
      *
-     * @param credentials PARTNER_ID: Partner ID from Developer Portal. PARTNER_SECRET: Partner Secret from Developer
-     *                    Portal. NEW_PARTNER_SECRET: New value for Partner Secret.
+     * @param newPartnerSecret   The new secret to be set for the partner.
      * @throws FinicityException An error occurred when interaction with the API
      */
-    void modifyPartnerSecret(Credentials credentials);
+    void modifyPartnerSecret(String newPartnerSecret);
 
     /**
      * An error has occurred when processing an operation in {@link PartnerOperations}.
