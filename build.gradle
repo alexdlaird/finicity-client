@@ -6,7 +6,7 @@ apply plugin: 'signing'
 
 group = 'com.github.alexdlaird'
 archivesBaseName = 'finicityclient'
-version = '1.0.0'
+version = '1.1.0-SNAPSHOT'
 
 // These values should be defined in the local gradle.properties file, which should never be committed to the repository
 def sonatypeUsername = hasProperty('sonatypeUsername') ? sonatypeUsername : System.getenv('sonatypeUsername')
