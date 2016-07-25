@@ -28,7 +28,12 @@ String partnerSecret = "FINICITY_PARTNER_SECRET";
 String testInstitutionId = "101732";
 
 FinicityClient finicityClient = DefaultFinicityClient.getInstance(appKey, partnerId, partnerSecret);
+```
 
+And there you go! You now have an instance of a client with an authenticated token, which you can use to easily
+communicate with the API. Here are some simple examples of API interactions:
+
+```java
 // Get your API credentials from https://developer.finicity.com/admin
 Customer customer = new Customer("test-username",
         "First Name",
