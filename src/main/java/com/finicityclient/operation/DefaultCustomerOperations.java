@@ -115,7 +115,7 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
     }
 
     @Override
-    public void addTestingCustomer(Customer customer) {
+    public Customer addTestingCustomer(Customer customer) {
         assert customer != null;
 
         Response response = restClient.executePost("/v1/customers/testing",
@@ -126,10 +126,18 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
         if (response.getStatusCode() != 201) {
             throw new CustomerOperations.CustomerOperationsException("Invalid response: " + response.getStatusCode() + ", " + response.getBody());
         }
+
+        try {
+            return serializer.read(Customer.class, response.getBody());
+        } catch (Exception ex) {
+            LOGGER.log(Level.ALL, "An error occurred when parsing the customer response.", ex);
+
+            throw new CustomerOperations.CustomerOperationsException("An error occurred when parsing the customer response.", ex);
+        }
     }
 
     @Override
-    public void addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) {
         assert customer != null;
 
         Response response = restClient.executePost("/v1/customers/active",
@@ -139,6 +147,14 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
 
         if (response.getStatusCode() != 201) {
             throw new CustomerOperations.CustomerOperationsException("Invalid response: " + response.getStatusCode() + ", " + response.getBody());
+        }
+
+        try {
+            return serializer.read(Customer.class, response.getBody());
+        } catch (Exception ex) {
+            LOGGER.log(Level.ALL, "An error occurred when parsing the customer response.", ex);
+
+            throw new CustomerOperations.CustomerOperationsException("An error occurred when parsing the customer response.", ex);
         }
     }
 

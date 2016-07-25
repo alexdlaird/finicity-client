@@ -87,6 +87,10 @@ public class LoginField implements Body {
         return value;
     }
 
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     public int getDisplayOrder() {
         return displayOrder;
     }

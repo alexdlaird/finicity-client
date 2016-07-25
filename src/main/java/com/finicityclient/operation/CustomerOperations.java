@@ -75,9 +75,11 @@ public interface CustomerOperations {
      * Success: HTTP 201 (Created)
      *
      * @param customer (required) The customer to be created.
+     * @return The newly created customer.
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
-    void addTestingCustomer(Customer customer);
+    Customer addTestingCustomer(Customer customer);
 
     /**
      * This service is not available from the Test Drive.
@@ -89,9 +91,11 @@ public interface CustomerOperations {
      * Success: HTTP 201 (Created)
      *
      * @param customer (required) The customer to be created.
+     * @return The newly created customer.
+     *
      * @throws FinicityException An error occurred when interaction with the API
      */
-    void addCustomer(Customer customer);
+    Customer addCustomer(Customer customer);
 
     /**
      * Modify the details for an enrolled customer.

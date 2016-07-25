@@ -29,10 +29,10 @@ import org.simpleframework.xml.Root;
 
 @Root(strict = false)
 public class Customer implements Body {
-    @Element
+    @Element(required = false)
     private String id;
 
-    @Element
+    @Element(required = false)
     private String username;
 
     @Element(required = false)
@@ -41,13 +41,19 @@ public class Customer implements Body {
     @Element(required = false)
     private String lastName;
 
-    @Element
+    @Element(required = false)
     private CustomerType type;
 
-    @Element
+    @Element(required = false)
     private long createdDate;
 
     public Customer() {
+    }
+
+    public Customer(String username, String firstName, String lastName) {
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Customer(String id, String username, String firstName, String lastName, CustomerType type, long createdDate) {

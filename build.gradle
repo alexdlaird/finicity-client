@@ -45,7 +45,7 @@ uploadArchives {
             pom.project {
                 name 'Finicity Client'
                 packaging 'jar'
-                description 'This is a Java Finicity Client library for communicating with the Finicity API'
+                description 'A Finicity Client in Java for communicating with the Finicity API'
                 url 'https://github.com/alexdlaird/finicity-client'
 
                 scm {
