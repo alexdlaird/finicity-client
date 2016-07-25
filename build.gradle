@@ -8,6 +8,9 @@ def projectGroup = 'com.finicityclient'
 def projectArtifactId = 'finicityclient'
 def projectVersion = '1.0.0-SNAPSHOT'
 
+def sonatypeUsername = hasProperty('sonatypeUsername') ? sonatypeUsername : System.getenv('sonatypeUsername')
+def sonatypePassword = hasProperty('sonatypePassword') ? sonatypePassword : System.getenv('sonatypePassword')
+
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from 'build/docs/javadoc'
