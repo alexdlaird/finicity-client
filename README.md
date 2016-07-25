@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alexdlaird/finicity-client.svg)](https://travis-ci.org/alexdlaird/finicity-client)
+
 # Finicity Client
 
 This is a Java Finicity Client library for communicating with the [Finicity API](https://developer.finicity.com/admin/docs).
