@@ -45,7 +45,7 @@ public class DefaultPartnerOperationsTest {
 
     private final DefaultPartnerOperations defaultPartnerOperations;
 
-    public DefaultPartnerOperationsTest() {
+    public DefaultPartnerOperationsTest() throws Exception {
         mockRestClient = FixtureHelper.createMockPartnerRestClient();
 
         defaultPartnerOperations = new DefaultPartnerOperations(mockRestClient, "APP_KEY", "PARTNER_ID", "PARTNER_SECRET");

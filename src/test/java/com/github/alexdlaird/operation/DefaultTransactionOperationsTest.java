@@ -26,7 +26,12 @@ package com.github.alexdlaird.operation;
 import com.github.alexdlaird.component.Token;
 import com.github.alexdlaird.component.rest.RestClient;
 import com.github.alexdlaird.fixture.FixtureHelper;
+import com.github.alexdlaird.type.Sort;
+import com.github.alexdlaird.type.customer.Customer;
+import com.github.alexdlaird.type.transaction.Transaction;
 import org.junit.Test;
+
+import java.util.List;
 
 public class DefaultTransactionOperationsTest {
 
@@ -34,8 +39,12 @@ public class DefaultTransactionOperationsTest {
 
     private final DefaultTransactionOperations defaultTransactionOperations;
 
-    public DefaultTransactionOperationsTest() {
-        mockRestClient = FixtureHelper.createMockTransactionRestClient();
+    private final Customer customer;
+
+    public DefaultTransactionOperationsTest() throws Exception {
+        customer = FixtureHelper.createCustomer();
+
+        mockRestClient = FixtureHelper.createMockTransactionRestClient(customer.getId());
         Token token = FixtureHelper.createToken();
 
         defaultTransactionOperations = new DefaultTransactionOperations(mockRestClient, "APP_KEY", token);
@@ -43,7 +52,9 @@ public class DefaultTransactionOperationsTest {
 
     @Test
     public void testGetTransactions() throws Exception {
-        // TODO: implement test
+        List<Transaction> transactions = defaultTransactionOperations.getTransactions(customer.getId(), System.currentTimeMillis(), System.currentTimeMillis(), null, null, Sort.ASC, true);
+
+        System.out.println(transactions);
     }
 
     @Test

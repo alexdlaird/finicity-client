@@ -23,24 +23,41 @@
 
 package com.github.alexdlaird.fixture;
 
+import com.github.alexdlaird.component.FinicityPersister;
 import com.github.alexdlaird.component.Token;
 import com.github.alexdlaird.component.rest.Parameter;
 import com.github.alexdlaird.component.rest.Response;
 import com.github.alexdlaird.component.rest.RestClient;
+import com.github.alexdlaird.type.customer.Customer;
+import com.github.alexdlaird.type.customer.CustomerType;
 import com.github.alexdlaird.type.partner.Credentials;
+import com.github.alexdlaird.type.partner.PartnerAccess;
+import com.github.alexdlaird.type.transaction.Transaction;
+import com.github.alexdlaird.type.transaction.Transactions;
+import org.simpleframework.xml.Serializer;
+
+import java.io.StringWriter;
+import java.util.Collections;
 
 import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class FixtureHelper {
-    public static RestClient createMockPartnerRestClient() {
+
+    private final static Serializer serializer = new FinicityPersister();
+
+    public static RestClient createMockPartnerRestClient() throws Exception {
         RestClient mockRestClient = mock(RestClient.class);
+
+        PartnerAccess partnerAccess = new PartnerAccess("TOKEN");
+        StringWriter writer = new StringWriter();
+        serializer.write(partnerAccess, writer);
 
         when(mockRestClient.executePost(
                 eq("/v2/partners/authentication"), any(Credentials.class), anyListOf(Parameter.class), anyMapOf(String.class, String.class)))
                 .thenReturn(
-                        new Response(200, "<access><token>TOKEN</token></access>", null));
+                        new Response(200, writer.toString(), null));
         when(mockRestClient.executePut(
                 eq("/v2/partners/authentication"), any(Credentials.class), anyListOf(Parameter.class), anyMapOf(String.class, String.class)))
                 .thenReturn(
@@ -73,10 +90,17 @@ public class FixtureHelper {
         return mockRestClient;
     }
 
-    public static RestClient createMockTransactionRestClient() {
+    public static RestClient createMockTransactionRestClient(String customerId) throws Exception {
         RestClient mockRestClient = mock(RestClient.class);
 
-        // TODO: implement mocks
+        Transactions transactions = new Transactions(Collections.singletonList(new Transaction(25.0, "description", System.currentTimeMillis(), System.currentTimeMillis())));
+        StringWriter writer = new StringWriter();
+        serializer.write(transactions, writer);
+
+        when(mockRestClient.executeGet(
+                eq("/v2/customers/" + customerId + "/transactions"), anyListOf(Parameter.class), anyMapOf(String.class, String.class)))
+                .thenReturn(
+                        new Response(200, writer.toString(), null));
 
         return mockRestClient;
     }
@@ -91,5 +115,9 @@ public class FixtureHelper {
 
     public static Token createToken() {
         return new Token("TOKEN", System.currentTimeMillis() + (90 * 60 * 1000));
+    }
+
+    public static Customer createCustomer() {
+        return new Customer("id1234", "test-username", "First", "Last", CustomerType.TESTING, System.currentTimeMillis());
     }
 }
