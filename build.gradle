@@ -11,15 +11,9 @@ def projectVersion = '1.0.0-SNAPSHOT'
 // These values should be defined in the local gradle.properties file, which should never be committed to the repository
 def sonatypeUsername = hasProperty('sonatypeUsername') ? sonatypeUsername : System.getenv('sonatypeUsername')
 def sonatypePassword = hasProperty('sonatypePassword') ? sonatypePassword : System.getenv('sonatypePassword')
-if (hasProperty('finicityDevAppKey')) {
-    System.setProperty('finicityDevAppKey', hasProperty('finicityDevAppKey') ? finicityDevAppKey : System.getenv('finicityDevAppKey'))
-}
-if (hasProperty('finicityDevPartnerId')) {
-    System.setProperty('finicityDevPartnerId', hasProperty('finicityDevPartnerId') ? finicityDevPartnerId : System.getenv('finicityDevPartnerId'))
-}
-if (hasProperty('finicityDevPartnerSecret')) {
-    System.setProperty('finicityDevPartnerSecret', hasProperty('finicityDevPartnerSecret') ? finicityDevPartnerSecret : System.getenv('finicityDevPartnerSecret'))
-}
+System.setProperty('finicityDevAppKey', hasProperty('finicityDevAppKey') ? finicityDevAppKey : System.getenv('finicityDevAppKey'))
+System.setProperty('finicityDevPartnerId', hasProperty('finicityDevPartnerId') ? finicityDevPartnerId : System.getenv('finicityDevPartnerId'))
+System.setProperty('finicityDevPartnerSecret', hasProperty('finicityDevPartnerSecret') ? finicityDevPartnerSecret : System.getenv('finicityDevPartnerSecret'))
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
