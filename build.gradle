@@ -12,13 +12,13 @@ def projectVersion = '1.0.0-SNAPSHOT'
 def sonatypeUsername = hasProperty('sonatypeUsername') ? sonatypeUsername : System.getenv('sonatypeUsername')
 def sonatypePassword = hasProperty('sonatypePassword') ? sonatypePassword : System.getenv('sonatypePassword')
 if (hasProperty('finicityDevAppKey')) {
-    System.setProperty('finicityDevAppKey', finicityDevAppKey)
+    System.setProperty('finicityDevAppKey', hasProperty('finicityDevAppKey') ? finicityDevAppKey : System.getenv('finicityDevAppKey'))
 }
 if (hasProperty('finicityDevPartnerId')) {
-    System.setProperty('finicityDevPartnerId', finicityDevPartnerId)
+    System.setProperty('finicityDevPartnerId', hasProperty('finicityDevPartnerId') ? finicityDevPartnerId : System.getenv('finicityDevPartnerId'))
 }
 if (hasProperty('finicityDevPartnerSecret')) {
-    System.setProperty('finicityDevPartnerSecret', finicityDevPartnerSecret)
+    System.setProperty('finicityDevPartnerSecret', hasProperty('finicityDevPartnerSecret') ? finicityDevPartnerSecret : System.getenv('finicityDevPartnerSecret'))
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
