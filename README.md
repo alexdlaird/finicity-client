@@ -4,10 +4,6 @@
 
 A Finicity Client in Java for communicating with the [Finicity API](https://developer.finicity.com/admin/docs).
 
-This client is currently usable, but the first fully-functional, stable release is still in development. You can,
-however, clone the source and build it yourself. The `master` branch is pseudo-stable, and when an official release is
-made available on Maven, we'll update this `README`.
-
 ## Install It
 
 Finicity Client is available on Maven Central, so it's as easy as including it as a depenendency in your build
