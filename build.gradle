@@ -11,9 +11,9 @@ def projectVersion = '1.0.0-SNAPSHOT'
 // These values should be defined in the local gradle.properties file, which should never be committed to the repository
 def sonatypeUsername = hasProperty('sonatypeUsername') ? sonatypeUsername : System.getenv('sonatypeUsername')
 def sonatypePassword = hasProperty('sonatypePassword') ? sonatypePassword : System.getenv('sonatypePassword')
-System.setProperty('finicityDevAppKey', hasProperty('finicityDevAppKey') ? finicityDevAppKey : System.getenv('finicityDevAppKey'))
-System.setProperty('finicityDevPartnerId', hasProperty('finicityDevPartnerId') ? finicityDevPartnerId : System.getenv('finicityDevPartnerId'))
-System.setProperty('finicityDevPartnerSecret', hasProperty('finicityDevPartnerSecret') ? finicityDevPartnerSecret : System.getenv('finicityDevPartnerSecret'))
+def finicityDevAppKey = hasProperty('finicityDevAppKey') ? finicityDevAppKey : System.getenv('finicityDevAppKey');
+def finicityDevPartnerId = hasProperty('finicityDevPartnerId') ? finicityDevPartnerId : System.getenv('finicityDevPartnerId');
+def finicityDevPartnerSecret = hasProperty('finicityDevPartnerSecret') ? finicityDevPartnerSecret : System.getenv('finicityDevPartnerSecret');
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
@@ -113,6 +113,10 @@ task integrationTest(type: Test) {
 }
 
 integrationTest {
+    System.setProperty('finicityDevAppKey', finicityDevAppKey ? finicityDevAppKey : '')
+    System.setProperty('finicityDevPartnerId', finicityDevPartnerId ? finicityDevPartnerId : '')
+    System.setProperty('finicityDevPartnerSecret', finicityDevPartnerSecret ? finicityDevPartnerSecret : '')
+
     systemProperties = System.properties
 }
 
