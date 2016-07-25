@@ -26,7 +26,12 @@ available Accounts (with MFA) for the test Institution (per this [Finicity tutor
 
 ```java
 // This is the test Institution ID defined by Finicity
+String appKey = "FINICITY_APP_KEY";
+String partnerId = "FINICITY_PARTNER_ID";
+String partnerSecret = "FINICITY_PARTNER_SECRET";
 String testInstitutionId = "101732";
+
+FinicityClient finicityClient = DefaultFinicityClient.getInstance(appKey, partnerId, partnerSecret);
 
 // Get your API credentials from https://developer.finicity.com/admin
 Customer customer = new Customer("test-username",

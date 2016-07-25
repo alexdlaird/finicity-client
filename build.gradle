@@ -4,12 +4,22 @@ apply plugin: 'jacoco'
 apply plugin: 'maven'
 apply plugin: 'signing'
 
-def projectGroup = 'com.finicityclient'
+def projectGroup = 'com.github.alexdlaird'
 def projectArtifactId = 'finicityclient'
 def projectVersion = '1.0.0-SNAPSHOT'
 
+// These values should be defined in the local gradle.properties file, which should never be committed to the repository
 def sonatypeUsername = hasProperty('sonatypeUsername') ? sonatypeUsername : System.getenv('sonatypeUsername')
 def sonatypePassword = hasProperty('sonatypePassword') ? sonatypePassword : System.getenv('sonatypePassword')
+if (hasProperty('finicityDevAppKey')) {
+    System.setProperty('finicityDevAppKey', finicityDevAppKey)
+}
+if (hasProperty('finicityDevPartnerId')) {
+    System.setProperty('finicityDevPartnerId', finicityDevPartnerId)
+}
+if (hasProperty('finicityDevPartnerSecret')) {
+    System.setProperty('finicityDevPartnerSecret', finicityDevPartnerSecret)
+}
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
@@ -87,6 +97,36 @@ jar {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
+
+sourceSets {
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+    }
+}
+
+configurations {
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+}
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+integrationTest {
+    systemProperties = System.properties
+}
+
+tasks.withType(Test) {
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
+
+integrationTest.mustRunAfter test
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
