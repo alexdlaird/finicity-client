@@ -13,7 +13,7 @@ made available on Maven, we'll update this `README`.
 Finicity Client is available on Maven Central, so it's as easy as including it as a depenendency in your build
 management system.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.finicityclient/finicityclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.finicityclient/finicityclient/)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/)
 
 ## Use It
 
