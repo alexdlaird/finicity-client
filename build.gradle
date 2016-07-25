@@ -46,6 +46,10 @@ uploadArchives {
                 authentication(userName: sonatypeUsername, password: sonatypePassword)
             }
 
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+
             pom.project {
                 name 'Finicity Client'
                 packaging 'jar'
@@ -70,6 +74,7 @@ uploadArchives {
                     developer {
                         id 'alexdlaird'
                         name 'Alex Laird'
+                        email 'contact@alexlaird.com'
                     }
                 }
             }
