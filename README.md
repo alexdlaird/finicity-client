@@ -2,14 +2,14 @@
 
 # Finicity Client
 
-A Finicity Client in Java for communicating with the <a href="https://developer.finicity.com/admin/docs" target="_blank">Finicity API</a>.
+A Finicity Client in Java for communicating with the [Finicity API](https://developer.finicity.com/admin/docs).
 
 ## Install It
 
 Finicity Client is available on Maven Central, so it's as easy as including it as a dependency in your build
 management system. Click on the badge below to see snippets to include the latest version in build tool.
 
-<a href="https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/" target="_blank">![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/badge.svg)</a>
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/)
 
 ## Use It
 
