@@ -2,14 +2,14 @@
 
 # Finicity Client
 
-A Finicity Client in Java for communicating with the [Finicity API](https://developer.finicity.com/admin/docs).
+A Finicity Client in Java for communicating with the <a href="https://developer.finicity.com/admin/docs" target="_blank">Finicity API</a>.
 
 ## Install It
 
-Finicity Client is available on Maven Central, so it's as easy as including it as a depenendency in your build
-management system.
+Finicity Client is available on Maven Central, so it's as easy as including it as a dependency in your build
+management system. Click on the badge below to see snippets to include the latest version in build tool.
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/)
+<a href="https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/" target="_blank">![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.github.alexdlaird/finicityclient/badge.svg)</a>
 
 ## Use It
 
@@ -25,7 +25,6 @@ available Accounts (with MFA) for the test Institution (per this [Finicity tutor
 String appKey = "FINICITY_APP_KEY";
 String partnerId = "FINICITY_PARTNER_ID";
 String partnerSecret = "FINICITY_PARTNER_SECRET";
-String testInstitutionId = "101732";
 
 FinicityClient finicityClient = DefaultFinicityClient.getInstance(appKey, partnerId, partnerSecret);
 ```
@@ -34,6 +33,8 @@ And there you go! You now have an instance of a client with an authenticated tok
 communicate with the API. Here are some simple examples of API interactions:
 
 ```java
+String testInstitutionId = "101732";
+
 // Get your API credentials from https://developer.finicity.com/admin
 Customer customer = new Customer("test-username",
         "First Name",
@@ -62,7 +63,7 @@ if (accountResponses.size() > 0 &&
     // another challenge
     mfaChallengeResponse.getQuestions().get(0).setAnswer("success");
     MfaChallengeRequest mfaChallengeRequest = new MfaChallengeRequest((mfaChallengeResponse.getQuestions()));
-    
+
     AccountMfaChallenge accountMfaChallenge = new AccountMfaChallenge(Collections.singletonList(mfaChallengeRequest));
 
     // Readd the Accounts with MFA authentication answers
@@ -89,4 +90,4 @@ This will generate both useful Javadoc as well as a dependency JAR in `build/lib
 dependency in your own project.
 
 But don't stop there! Extending this client is almost certainly something the rest of us would benefit from, so if you
-build something useful, please submit a pull request to the `develop` branch. 
+build something useful, please submit a pull request to the `develop` branch.
