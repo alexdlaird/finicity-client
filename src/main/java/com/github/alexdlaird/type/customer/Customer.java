@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.customer;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -50,13 +51,14 @@ public class Customer implements Body {
     public Customer() {
     }
 
-    public Customer(String username, String firstName, String lastName) {
+    public Customer(final String username, final String firstName, final String lastName) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public Customer(String id, String username, String firstName, String lastName, CustomerType type, Long createdDate) {
+    public Customer(final String id, final String username, final String firstName, final String lastName,
+                    final CustomerType type, final Long createdDate) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;

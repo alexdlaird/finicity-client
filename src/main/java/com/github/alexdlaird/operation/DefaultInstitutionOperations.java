@@ -47,13 +47,13 @@ public class DefaultInstitutionOperations extends DefaultOperations implements I
      * @param appKey     Finicity appKey.
      * @param token      Finicity authentication token.
      */
-    public DefaultInstitutionOperations(RestClient restClient, String appKey, Token token) {
+    public DefaultInstitutionOperations(final RestClient restClient, final String appKey, final Token token) {
         super(restClient, appKey, token);
     }
 
     @Override
-    public List<Institution> getInstitutions(String search, Integer start, Integer limit) {
-        List<Parameter> parameters = new ArrayList<>();
+    public List<Institution> getInstitutions(final String search, final Integer start, final Integer limit) {
+        final List<Parameter> parameters = new ArrayList<>();
         if (StringUtils.isNotBlank(search)) {
             parameters.add(new Parameter("search", search));
         }
@@ -64,7 +64,7 @@ public class DefaultInstitutionOperations extends DefaultOperations implements I
             parameters.add(new Parameter("limit", limit.toString()));
         }
 
-        Response response = restClient.executeGet("/v1/institutions",
+        final Response response = restClient.executeGet("/v1/institutions",
                 parameters,
                 null);
 
@@ -80,10 +80,10 @@ public class DefaultInstitutionOperations extends DefaultOperations implements I
     }
 
     @Override
-    public Institution getInstitution(String institutionId) {
+    public Institution getInstitution(final String institutionId) {
         assert institutionId != null;
 
-        Response response = restClient.executeGet("/v1/institutions/" + institutionId,
+        final Response response = restClient.executeGet("/v1/institutions/" + institutionId,
                 null,
                 null);
 
@@ -99,10 +99,10 @@ public class DefaultInstitutionOperations extends DefaultOperations implements I
     }
 
     @Override
-    public InstitutionDetails getInstitutionDetails(String institutionId) {
+    public InstitutionDetails getInstitutionDetails(final String institutionId) {
         assert institutionId != null;
 
-        Response response = restClient.executeGet("/v1/institutions/" + institutionId + "/details",
+        final Response response = restClient.executeGet("/v1/institutions/" + institutionId + "/details",
                 null,
                 null);
 
@@ -118,10 +118,10 @@ public class DefaultInstitutionOperations extends DefaultOperations implements I
     }
 
     @Override
-    public LoginForm getInstitutionLoginForm(String institutionId) {
+    public LoginForm getInstitutionLoginForm(final String institutionId) {
         assert institutionId != null;
 
-        Response response = restClient.executeGet("/v1/institutions/" + institutionId + "/loginForm",
+        final Response response = restClient.executeGet("/v1/institutions/" + institutionId + "/loginForm",
                 null,
                 null);
 

@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -77,7 +78,11 @@ public class Account implements AccountResponse, Body {
     public Account() {
     }
 
-    public Account(String id, String number, String name, AccountType type, AccountStatus status, Double balance, Integer aggregationStatusCode, String customerId, String institutionId, Long balanceDate, Long aggregationSuccessDate, Long aggregationAttemptDate, Long createdDate, Long lastUpdatedDate, String detail) {
+    public Account(final String id, final String number, final String name, final AccountType type,
+                   final AccountStatus status, final Double balance, final Integer aggregationStatusCode,
+                   final String customerId, final String institutionId, final Long balanceDate,
+                   final Long aggregationSuccessDate, final Long aggregationAttemptDate, final Long createdDate,
+                   final Long lastUpdatedDate, final String detail) {
         this.id = id;
         this.number = number;
         this.name = name;

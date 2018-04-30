@@ -26,9 +26,14 @@ package com.github.alexdlaird.component.rest;
 import com.github.alexdlaird.component.FinicityPersister;
 import com.github.alexdlaird.component.StringUtils;
 import com.github.alexdlaird.component.Token;
+
 import org.simpleframework.xml.Serializer;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -39,12 +44,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The default implementation of a {@link RestClient}.
- * <p>
- * Each request has the "Finicity-App-Key" header added to it with the appKey. If a token exists, the
- * "Finicity-App-Token" header is also set with that value.
- * <p>
- * If no body is given, the "Content-Length" header is set to 0.
+ * The default implementation of a {@link RestClient}. <p> Each request has the "Finicity-App-Key" header added to it
+ * with the appKey. If a token exists, the "Finicity-App-Token" header is also set with that value. <p> If no body is
+ * given, the "Content-Length" header is set to 0.
  */
 public class DefaultRestClient implements RestClient {
     /**
@@ -89,7 +91,7 @@ public class DefaultRestClient implements RestClient {
      * @param encoding    Default encoding for the client.
      * @param contentType Default contentType header for the client.
      */
-    public DefaultRestClient(String appKey, String encoding, String contentType) {
+    public DefaultRestClient(final String appKey, final String encoding, final String contentType) {
         this.appKey = appKey;
 
         this.encoding = encoding;
@@ -104,9 +106,9 @@ public class DefaultRestClient implements RestClient {
         }
     }
 
-    private String getBodyString(Body body) throws Exception {
+    private String getBodyString(final Body body) throws Exception {
         if (body != null) {
-            StringWriter stringWriter = new StringWriter();
+            final StringWriter stringWriter = new StringWriter();
             serializer.write(body, stringWriter);
             return stringWriter.toString();
         } else {
@@ -119,56 +121,65 @@ public class DefaultRestClient implements RestClient {
      *
      * @param token The token to be updated.
      */
-    public void refreshToken(Token token) {
+    public void refreshToken(final Token token) {
         this.token = token;
     }
 
     @Override
-    public Response executeGet(String url, List<Parameter> parameters, Map<String, String> additionalHeaders) {
+    public Response executeGet(final String url, final List<Parameter> parameters,
+                               final Map<String, String> additionalHeaders) {
         ensureTokenIsValid();
 
         try {
-            return execute(urlWithParameters(BASE_URL + url, parameters), null, "GET", additionalHeaders);
+            return execute(urlWithParameters(BASE_URL + url, parameters), null, "GET",
+                    additionalHeaders);
         } catch (Exception ex) {
             throw new RestClientException("Rest client error", ex);
         }
     }
 
     @Override
-    public Response executePost(String url, Body body, List<Parameter> parameters, Map<String, String> additionalHeaders) {
+    public Response executePost(final String url, final Body body, final List<Parameter> parameters,
+                                final Map<String, String> additionalHeaders) {
         ensureTokenIsValid();
 
         try {
-            return execute(urlWithParameters(BASE_URL + url, parameters), getBodyString(body), "POST", additionalHeaders);
+            return execute(urlWithParameters(BASE_URL + url, parameters), getBodyString(body), "POST",
+                    additionalHeaders);
         } catch (Exception ex) {
             throw new RestClientException("Rest client error", ex);
         }
     }
 
     @Override
-    public Response executePut(String url, Body body, List<Parameter> parameters, Map<String, String> additionalHeaders) {
+    public Response executePut(final String url, final Body body, final List<Parameter> parameters,
+                               final Map<String, String> additionalHeaders) {
         ensureTokenIsValid();
 
         try {
-            return execute(urlWithParameters(BASE_URL + url, parameters), getBodyString(body), "PUT", additionalHeaders);
+            return execute(urlWithParameters(BASE_URL + url, parameters), getBodyString(body), "PUT",
+                    additionalHeaders);
         } catch (Exception ex) {
             throw new RestClientException("Rest client error", ex);
         }
     }
 
     @Override
-    public Response executeDelete(String url, List<Parameter> parameters, Map<String, String> additionalHeaders) {
+    public Response executeDelete(final String url, final List<Parameter> parameters,
+                                  final Map<String, String> additionalHeaders) {
         ensureTokenIsValid();
 
         try {
-            return execute(urlWithParameters(BASE_URL + url, parameters), null, "DELETE", additionalHeaders);
+            return execute(urlWithParameters(BASE_URL + url, parameters), null, "DELETE",
+                    additionalHeaders);
         } catch (Exception ex) {
             throw new RestClientException("Rest client error", ex);
         }
     }
 
-    private String urlWithParameters(String url, List<Parameter> parameters) throws UnsupportedEncodingException {
-        StringBuilder stringBuilder = new StringBuilder();
+    private String urlWithParameters(final String url, final List<Parameter> parameters)
+            throws UnsupportedEncodingException {
+        final StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(url);
 
         if (parameters != null && parameters.size() > 0) {
@@ -191,7 +202,8 @@ public class DefaultRestClient implements RestClient {
         return stringBuilder.toString();
     }
 
-    private Response execute(String url, String body, String method, Map<String, String> additionalHeaders) {
+    private Response execute(final String url, final String body, final String method,
+                             final Map<String, String> additionalHeaders) {
         HttpURLConnection httpUrlConnection = null;
         OutputStream outputStream = null;
         InputStream inputStream = null;
@@ -250,7 +262,8 @@ public class DefaultRestClient implements RestClient {
         }
     }
 
-    private void appendFinicityDefaultsToConnection(HttpURLConnection httpUrlConnection, Map<String, String> additionalHeaders) {
+    private void appendFinicityDefaultsToConnection(final HttpURLConnection httpUrlConnection,
+                                                    final Map<String, String> additionalHeaders) {
         httpUrlConnection.setRequestProperty("Content-Type", contentType);
         httpUrlConnection.setRequestProperty("Finicity-App-Key", appKey);
         if (token != null) {
@@ -279,7 +292,7 @@ public class DefaultRestClient implements RestClient {
      *
      * @param httpUrlConnection The URL connection to modify.
      */
-    protected void modifyConnection(HttpURLConnection httpUrlConnection) {
+    protected void modifyConnection(final HttpURLConnection httpUrlConnection) {
     }
 
     /**
@@ -287,10 +300,9 @@ public class DefaultRestClient implements RestClient {
      *
      * @param url The URL to connect to.
      * @return A URL connection.
-     *
      * @throws IOException An I/O exception has occurred.
      */
-    protected HttpURLConnection createHttpUrlConnection(String url) throws IOException {
+    protected HttpURLConnection createHttpUrlConnection(final String url) throws IOException {
         return (HttpURLConnection) new URL(url).openConnection();
     }
 
@@ -300,7 +312,7 @@ public class DefaultRestClient implements RestClient {
      *
      * @param encoding The encoding string to set.
      */
-    public void setEncoding(String encoding) {
+    public void setEncoding(final String encoding) {
         this.encoding = encoding;
     }
 
@@ -310,7 +322,7 @@ public class DefaultRestClient implements RestClient {
      *
      * @param contentType The content type string to set.
      */
-    public void setContentType(String contentType) {
+    public void setContentType(final String contentType) {
         this.contentType = contentType;
     }
 }

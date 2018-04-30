@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.institution;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.ElementList;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class LoginForm implements Body {
     public LoginForm() {
     }
 
-    public LoginForm(List<LoginField> loginField) {
+    public LoginForm(final List<LoginField> loginField) {
         this.loginField = loginField;
     }
 

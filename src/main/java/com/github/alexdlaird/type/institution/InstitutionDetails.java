@@ -37,7 +37,7 @@ public class InstitutionDetails {
     public InstitutionDetails() {
     }
 
-    public InstitutionDetails(Institution institution, LoginForm loginForm) {
+    public InstitutionDetails(final Institution institution, final LoginForm loginForm) {
         this.institution = institution;
         this.loginForm = loginForm;
     }

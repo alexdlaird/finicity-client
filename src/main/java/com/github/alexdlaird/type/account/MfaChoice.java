@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Root;
 import org.simpleframework.xml.Text;
@@ -36,7 +37,10 @@ public class MfaChoice implements Body {
     @Text
     private String text;
 
-    public MfaChoice(String value, String text) {
+    public MfaChoice() {
+    }
+
+    public MfaChoice(final String value, final String text) {
         this.value = value;
         this.text = text;
     }

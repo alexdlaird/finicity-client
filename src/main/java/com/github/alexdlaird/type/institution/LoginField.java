@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.institution;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 
 public class LoginField implements Body {
@@ -57,13 +58,15 @@ public class LoginField implements Body {
     public LoginField() {
     }
 
-    public LoginField(String id, String name, String value) {
+    public LoginField(final String id, final String name, final String value) {
         this.id = id;
         this.name = name;
         this.value = value;
     }
 
-    public LoginField(String id, String name, String value, Integer displayOrder, Boolean mask, String description, String instructions, Integer valueLengthMin, Integer valueLengthMax) {
+    public LoginField(final String id, final String name, final String value, final Integer displayOrder,
+                      final Boolean mask, final String description, final String instructions,
+                      final Integer valueLengthMin, final Integer valueLengthMax) {
         this.id = id;
         this.name = name;
         this.value = value;
@@ -87,7 +90,7 @@ public class LoginField implements Body {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(final String value) {
         this.value = value;
     }
 

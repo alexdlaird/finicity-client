@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -37,7 +38,7 @@ public class AccountMfaChallenge implements Body {
     public AccountMfaChallenge() {
     }
 
-    public AccountMfaChallenge(List<MfaChallengeRequest> mfaChallenges) {
+    public AccountMfaChallenge(final List<MfaChallengeRequest> mfaChallenges) {
         this.mfaChallenges = mfaChallenges;
     }
 

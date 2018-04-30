@@ -30,7 +30,7 @@ public enum TransactionStatus {
 
     private final String name;
 
-    TransactionStatus(String name) {
+    TransactionStatus(final String name) {
         this.name = name;
     }
 

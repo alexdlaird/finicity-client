@@ -26,6 +26,7 @@ package com.github.alexdlaird.operation;
 import com.github.alexdlaird.component.FinicityPersister;
 import com.github.alexdlaird.component.Token;
 import com.github.alexdlaird.component.rest.RestClient;
+
 import org.simpleframework.xml.Serializer;
 
 abstract class DefaultOperations {
@@ -50,13 +51,13 @@ abstract class DefaultOperations {
     private Token token;
 
     /**
-     * Construct a default {@link com.finicityclient.operation operations} instance.
+     * Construct a default {@link com.github.alexdlaird.operation operations} instance.
      *
      * @param restClient A REST client for operations.
      * @param appKey     Finicity appKey.
      * @param token      Finicity authentication token.
      */
-    public DefaultOperations(RestClient restClient, String appKey, Token token) {
+    public DefaultOperations(final RestClient restClient, final String appKey, final Token token) {
         this.restClient = restClient;
 
         this.appKey = appKey;
@@ -70,7 +71,7 @@ abstract class DefaultOperations {
      *
      * @param token The token to be updated.
      */
-    public void refreshToken(Token token) {
+    public void refreshToken(final Token token) {
         this.token = token;
     }
 

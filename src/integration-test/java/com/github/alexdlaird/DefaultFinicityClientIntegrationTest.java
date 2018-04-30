@@ -1,12 +1,41 @@
+/*
+ * Copyright (c) 2016 Alex Laird
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ * LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+ * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package com.github.alexdlaird;
 
 import com.github.alexdlaird.component.StringUtils;
-import com.github.alexdlaird.type.account.*;
+import com.github.alexdlaird.type.account.Account;
+import com.github.alexdlaird.type.account.AccountLoginForm;
+import com.github.alexdlaird.type.account.AccountMfaChallenge;
+import com.github.alexdlaird.type.account.AccountResponse;
+import com.github.alexdlaird.type.account.MfaChallengeRequest;
+import com.github.alexdlaird.type.account.MfaChallengeResponse;
 import com.github.alexdlaird.type.customer.Customer;
 import com.github.alexdlaird.type.institution.InstitutionDetails;
 import com.github.alexdlaird.type.institution.LoginForm;
 import com.github.alexdlaird.type.transaction.Transaction;
 import com.github.alexdlaird.type.transaction.TransactionStatus;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,13 +72,13 @@ public class DefaultFinicityClientIntegrationTest {
 
     @Test
     public void endToEndTest() {
-        Customer customer = givenCustomer();
-        AccountLoginForm accountLoginForm = givenAuthenticationDetails();
-        List<Account> accounts = givenAccounts(customer, accountLoginForm);
+        final Customer customer = givenCustomer();
+        final AccountLoginForm accountLoginForm = givenAuthenticationDetails();
+        final List<Account> accounts = givenAccounts(customer, accountLoginForm);
         // This test transaction is for pusher callbacks, it won't be returned in the list of test transactions below
-        Transaction transaction = givenTransaction(customer, accounts);
+        final Transaction transaction = givenTransaction(customer, accounts);
 
-        List<Transaction> transactions = finicityClient.getTransactionOperations().getTransactions(customer.getId(), ((System.currentTimeMillis() - 259200000) / 1000), System.currentTimeMillis() / 1000, null, null, null, true);
+        final List<Transaction> transactions = finicityClient.getTransactionOperations().getTransactions(customer.getId(), ((System.currentTimeMillis() - 259200000) / 1000), System.currentTimeMillis() / 1000, null, null, null, true);
 
         // Test transactions are generated periodically, so there aren't any that will be returned here
         assertEquals(0, transactions.size());
@@ -71,11 +100,11 @@ public class DefaultFinicityClientIntegrationTest {
     }
 
     public AccountLoginForm givenAuthenticationDetails() {
-        InstitutionDetails institutionDetails = finicityClient.getInstitutionOperations().getInstitutionDetails(TEST_INSTITUTION_ID);
+        final InstitutionDetails institutionDetails = finicityClient.getInstitutionOperations().getInstitutionDetails(TEST_INSTITUTION_ID);
 
         // Build an authentication form with details from Finicity's tutorial; try different authentication schemes by using
         // different values from the tutorial at https://finicity.zendesk.com/hc/en-us/articles/201750869-Testing-Accounts
-        LoginForm loginForm = institutionDetails.getLoginForm();
+        final LoginForm loginForm = institutionDetails.getLoginForm();
         loginForm.getLoginField().get(0).setValue("tfa_text");
         loginForm.getLoginField().get(1).setValue("go");
         return new AccountLoginForm(loginForm);
@@ -93,13 +122,13 @@ public class DefaultFinicityClientIntegrationTest {
                 accountResponses.get(0) instanceof MfaChallengeResponse)
 
         {
-            MfaChallengeResponse mfaChallengeResponse = ((List<MfaChallengeResponse>) accountResponses).get(0);
+            final MfaChallengeResponse mfaChallengeResponse = ((List<MfaChallengeResponse>) accountResponses).get(0);
             // If you'd like to test multiple MFA challenges, set this answer to "mfa" and the test API will respond with
             // another challenge
             mfaChallengeResponse.getQuestions().get(0).setAnswer("success");
-            MfaChallengeRequest mfaChallengeRequest = new MfaChallengeRequest((mfaChallengeResponse.getQuestions()));
+            final MfaChallengeRequest mfaChallengeRequest = new MfaChallengeRequest((mfaChallengeResponse.getQuestions()));
 
-            AccountMfaChallenge accountMfaChallenge = new AccountMfaChallenge(Collections.singletonList(mfaChallengeRequest));
+            final AccountMfaChallenge accountMfaChallenge = new AccountMfaChallenge(Collections.singletonList(mfaChallengeRequest));
 
             // Readd the Accounts with MFA authentication answers
             accountResponses = finicityClient.getAccountOperations().addAllAccountsMfa(mfaChallengeResponse.getSession(),
@@ -113,9 +142,9 @@ public class DefaultFinicityClientIntegrationTest {
     }
 
     public Transaction givenTransaction(Customer customer, List<Account> accounts) {
-        Transaction transactionRequest = new Transaction(24.0, "description", System.currentTimeMillis(), System.currentTimeMillis());
+        final Transaction transactionRequest = new Transaction(24.0, "description", System.currentTimeMillis(), System.currentTimeMillis());
 
-        Transaction transaction = finicityClient.getTxPushOperations().addTransactionForTestingAccount(customer.getId(), accounts.get(0).getId(), transactionRequest);
+        final Transaction transaction = finicityClient.getTxPushOperations().addTransactionForTestingAccount(customer.getId(), accounts.get(0).getId(), transactionRequest);
 
         assertNotNull(transaction.getId());
         assertNotNull(transaction.getCreatedDate());

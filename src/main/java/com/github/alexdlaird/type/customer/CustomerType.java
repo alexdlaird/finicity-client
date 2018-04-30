@@ -29,7 +29,7 @@ public enum CustomerType {
 
     private final String name;
 
-    CustomerType(String name) {
+    CustomerType(final String name) {
         this.name = name;
     }
 

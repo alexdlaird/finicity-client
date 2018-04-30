@@ -34,7 +34,7 @@ public abstract class FinicityException extends RuntimeException {
      *
      * @param message The message describing the exception
      */
-    public FinicityException(String message) {
+    public FinicityException(final String message) {
         super(message);
     }
 
@@ -44,7 +44,7 @@ public abstract class FinicityException extends RuntimeException {
      * @param message The message describing the exception
      * @param cause   The initial cause of the exception
      */
-    public FinicityException(String message, Throwable cause) {
+    public FinicityException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

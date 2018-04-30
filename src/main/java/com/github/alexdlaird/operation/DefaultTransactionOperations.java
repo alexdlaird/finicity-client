@@ -45,17 +45,19 @@ public class DefaultTransactionOperations extends DefaultOperations implements T
      * @param appKey     Finicity appKey.
      * @param token      Finicity authentication token.
      */
-    public DefaultTransactionOperations(RestClient restClient, String appKey, Token token) {
+    public DefaultTransactionOperations(final RestClient restClient, final String appKey, final Token token) {
         super(restClient, appKey, token);
     }
 
     @Override
-    public List<Transaction> getTransactions(String customerId, Long fromDate, Long toDate, Integer start, Integer limit, Sort sort, Boolean includePending) {
+    public List<Transaction> getTransactions(final String customerId, final Long fromDate, final Long toDate,
+                                             final Integer start, final Integer limit, final Sort sort,
+                                             final Boolean includePending) {
         assert customerId != null;
         assert fromDate != null;
         assert toDate != null;
 
-        List<Parameter> parameters = new ArrayList<>();
+        final List<Parameter> parameters = new ArrayList<>();
         parameters.add(new Parameter("fromDate", fromDate.toString()));
         parameters.add(new Parameter("toDate", toDate.toString()));
         if (start != null) {
@@ -71,7 +73,7 @@ public class DefaultTransactionOperations extends DefaultOperations implements T
             parameters.add(new Parameter("includePending", includePending.toString()));
         }
 
-        Response response = restClient.executeGet("/v2/customers/" + customerId + "/transactions",
+        final Response response = restClient.executeGet("/v2/customers/" + customerId + "/transactions",
                 parameters,
                 null);
 
@@ -87,13 +89,16 @@ public class DefaultTransactionOperations extends DefaultOperations implements T
     }
 
     @Override
-    public List<Transaction> getAccountTransactions(String customerId, String accountId, Long fromDate, Long toDate, Integer start, Integer limit, Sort sort, Boolean includePending) {
+    public List<Transaction> getAccountTransactions(final String customerId, final String accountId,
+                                                    final Long fromDate, final Long toDate, final Integer start,
+                                                    final Integer limit, final Sort sort,
+                                                    final Boolean includePending) {
         assert customerId != null;
         assert accountId != null;
         assert fromDate != null;
         assert toDate != null;
 
-        List<Parameter> parameters = new ArrayList<>();
+        final List<Parameter> parameters = new ArrayList<>();
         parameters.add(new Parameter("fromDate", fromDate.toString()));
         parameters.add(new Parameter("toDate", toDate.toString()));
         if (start != null) {
@@ -109,7 +114,7 @@ public class DefaultTransactionOperations extends DefaultOperations implements T
             parameters.add(new Parameter("includePending", includePending.toString()));
         }
 
-        Response response = restClient.executeGet("/v2/customers/" + customerId + "/accounts/" + accountId + "/transactions",
+        final Response response = restClient.executeGet("/v2/customers/" + customerId + "/accounts/" + accountId + "/transactions",
                 parameters,
                 null);
 
@@ -125,11 +130,11 @@ public class DefaultTransactionOperations extends DefaultOperations implements T
     }
 
     @Override
-    public Transaction getTransaction(String customerId, String transactionId) {
+    public Transaction getTransaction(final String customerId, final String transactionId) {
         assert customerId != null;
         assert transactionId != null;
 
-        Response response = restClient.executeGet("/v2/customers/" + customerId + "/transactions/" + transactionId,
+        final Response response = restClient.executeGet("/v2/customers/" + customerId + "/transactions/" + transactionId,
                 null,
                 null);
 

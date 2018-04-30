@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementMap;
 import org.simpleframework.xml.Root;
@@ -50,7 +51,8 @@ public class MfaQuestion implements Body {
     public MfaQuestion() {
     }
 
-    public MfaQuestion(String text, String image, Map<String, String> choices, Map<String, String> imageChoices) {
+    public MfaQuestion(final String text, final String image, final Map<String, String> choices,
+                       final Map<String, String> imageChoices) {
         this.text = text;
         this.image = image;
         this.choices = choices;
@@ -77,7 +79,7 @@ public class MfaQuestion implements Body {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(final String answer) {
         this.answer = answer;
     }
 }

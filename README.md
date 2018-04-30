@@ -4,6 +4,12 @@
 
 A Finicity Client in Java for communicating with the [Finicity API](https://developer.finicity.com/admin/docs).
 
+ **NOTE:** This SDK, while functional, was never fully finished (stability/efficiency improvements, relying on
+ CompletableFutures, more robust testing, etc.), as Finicity eventually made their own APIs compatible with Intuit's
+ SDK. They document the official supported way to connect to their APIs [here](https://community.finicity.com/s/article/208775606-Finicity-Setup#java_config),
+ and Intuit's SDK can be found [here](https://developer.intuit.com/docs/00_quickbooks_online/2_build/40_sdks/02_java/0002_install_the_java_sdk).
+ This is not an unsupported, legacy repository.
+
 ## Install It
 
 Finicity Client is available on Maven Central, so it's as easy as including it as a dependency in your build

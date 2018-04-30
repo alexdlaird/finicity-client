@@ -25,6 +25,7 @@ package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
 import com.github.alexdlaird.type.institution.LoginForm;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -36,7 +37,7 @@ public class AccountLoginForm implements Body {
     public AccountLoginForm() {
     }
 
-    public AccountLoginForm(LoginForm credentials) {
+    public AccountLoginForm(final LoginForm credentials) {
         this.credentials = credentials;
     }
 

@@ -46,7 +46,7 @@ public class Transactions {
     public Transactions() {
     }
 
-    public Transactions(List<Transaction> transactions) {
+    public Transactions(final List<Transaction> transactions) {
         this.transactions = transactions;
     }
 

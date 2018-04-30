@@ -26,16 +26,25 @@ package com.github.alexdlaird;
 import com.github.alexdlaird.component.Token;
 import com.github.alexdlaird.component.rest.DefaultRestClient;
 import com.github.alexdlaird.component.rest.RestClient;
+import com.github.alexdlaird.operation.AccountOperations;
+import com.github.alexdlaird.operation.CustomerOperations;
+import com.github.alexdlaird.operation.DefaultAccountOperations;
+import com.github.alexdlaird.operation.DefaultCustomerOperations;
+import com.github.alexdlaird.operation.DefaultInstitutionOperations;
+import com.github.alexdlaird.operation.DefaultPartnerOperations;
+import com.github.alexdlaird.operation.DefaultTransactionOperations;
+import com.github.alexdlaird.operation.DefaultTxPushOperations;
+import com.github.alexdlaird.operation.InstitutionOperations;
+import com.github.alexdlaird.operation.PartnerOperations;
+import com.github.alexdlaird.operation.TransactionOperations;
+import com.github.alexdlaird.operation.TxPushOperations;
 import com.github.alexdlaird.type.partner.PartnerAccess;
-import com.github.alexdlaird.operation.*;
 
 /**
  * The default implementation of a {@link FinicityClient}, which instantiates default Operations clients and implements
- * token refreshing.
- * <p>
- * This implementation is a singleton pattern, and an instance of the client can be retrieved by calling {@link
- * #getInstance(String, String, String)}. This is to ensure an authentication token is not retrieved too often and the
- * proper refresh pattern is followed.
+ * token refreshing. <p> This implementation is a singleton pattern, and an instance of the client can be retrieved by
+ * calling {@link #getInstance(String, String, String)}. This is to ensure an authentication token is not retrieved too
+ * often and the proper refresh pattern is followed.
  */
 public class DefaultFinicityClient implements FinicityClient {
     /**
@@ -129,7 +138,7 @@ public class DefaultFinicityClient implements FinicityClient {
         this.restClient = new DefaultRestClient(appKey, DEFAULT_ENCODING, DEFAULT_CONTENT_TYPE);
 
         partnerOperations = new DefaultPartnerOperations(restClient, appKey, partnerId, partnerSecret);
-        PartnerAccess partnerAccess = partnerOperations.authentication();
+        final PartnerAccess partnerAccess = partnerOperations.authentication();
         token = new Token(partnerAccess.getToken(), System.currentTimeMillis() + DEFAULT_TOKEN_EXPIRATION);
         restClient.refreshToken(token);
 
@@ -141,10 +150,9 @@ public class DefaultFinicityClient implements FinicityClient {
     }
 
     /**
-     * Retrieve the singleton instance of the default Finicity client.
-     * <p>
-     * Note that if an instance already exists and getInstance is called with a different set of Finicity credentials, a
-     * new instance of the singleton will be instantiated and returned.
+     * Retrieve the singleton instance of the default Finicity client. <p> Note that if an instance already exists and
+     * getInstance is called with a different set of Finicity credentials, a new instance of the singleton will be
+     * instantiated and returned.
      *
      * @param appKey        The Finicity developer appKey.
      * @param partnerId     The Finicity developer partnerId.
@@ -216,11 +224,9 @@ public class DefaultFinicityClient implements FinicityClient {
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s singleton, then retrieve
-     * this Operations client to ensure a fresh and valid authentication token is always used. If you are seeing {@link
-     * RestClient.RestClientTokenExpiredException}, this is likely the cause.
+     * {@inheritDoc} <p> With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s
+     * singleton, then retrieve this Operations client to ensure a fresh and valid authentication token is always used.
+     * If you are seeing {@link RestClient.RestClientTokenExpiredException}, this is likely the cause.
      */
     @Override
     public InstitutionOperations getInstitutionOperations() {
@@ -230,11 +236,9 @@ public class DefaultFinicityClient implements FinicityClient {
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s singleton, then retrieve
-     * this Operations client to ensure a fresh and valid authentication token is always used. If you are seeing {@link
-     * RestClient.RestClientTokenExpiredException}, this is likely the cause.
+     * {@inheritDoc} <p> With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s
+     * singleton, then retrieve this Operations client to ensure a fresh and valid authentication token is always used.
+     * If you are seeing {@link RestClient.RestClientTokenExpiredException}, this is likely the cause.
      */
     @Override
     public CustomerOperations getCustomerOperations() {
@@ -244,11 +248,9 @@ public class DefaultFinicityClient implements FinicityClient {
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s singleton, then retrieve
-     * this Operations client to ensure a fresh and valid authentication token is always used. If you are seeing {@link
-     * RestClient.RestClientTokenExpiredException}, this is likely the cause.
+     * {@inheritDoc} <p> With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s
+     * singleton, then retrieve this Operations client to ensure a fresh and valid authentication token is always used.
+     * If you are seeing {@link RestClient.RestClientTokenExpiredException}, this is likely the cause.
      */
     @Override
     public AccountOperations getAccountOperations() {
@@ -258,11 +260,9 @@ public class DefaultFinicityClient implements FinicityClient {
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s singleton, then retrieve
-     * this Operations client to ensure a fresh and valid authentication token is always used. If you are seeing {@link
-     * RestClient.RestClientTokenExpiredException}, this is likely the cause.
+     * {@inheritDoc} <p> With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s
+     * singleton, then retrieve this Operations client to ensure a fresh and valid authentication token is always used.
+     * If you are seeing {@link RestClient.RestClientTokenExpiredException}, this is likely the cause.
      */
     @Override
     public TransactionOperations getTransactionOperations() {
@@ -272,11 +272,9 @@ public class DefaultFinicityClient implements FinicityClient {
     }
 
     /**
-     * {@inheritDoc}
-     * <p>
-     * With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s singleton, then retrieve
-     * this Operations client to ensure a fresh and valid authentication token is always used. If you are seeing {@link
-     * RestClient.RestClientTokenExpiredException}, this is likely the cause.
+     * {@inheritDoc} <p> With each use, use the static reference to obtain the {@link DefaultFinicityClient}'s
+     * singleton, then retrieve this Operations client to ensure a fresh and valid authentication token is always used.
+     * If you are seeing {@link RestClient.RestClientTokenExpiredException}, this is likely the cause.
      */
     @Override
     public TxPushOperations getTxPushOperations() {

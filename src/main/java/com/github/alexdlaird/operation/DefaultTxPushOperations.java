@@ -43,16 +43,17 @@ public class DefaultTxPushOperations extends DefaultOperations implements TxPush
      * @param appKey     Finicity appKey.
      * @param token      Finicity authentication token.
      */
-    public DefaultTxPushOperations(RestClient restClient, String appKey, Token token) {
+    public DefaultTxPushOperations(final RestClient restClient, final String appKey, final Token token) {
         super(restClient, appKey, token);
     }
 
     @Override
-    public List<Subscription> enableTxPushNotifications(String customerId, String accountId, Subscription subscription) {
+    public List<Subscription> enableTxPushNotifications(final String customerId, final String accountId,
+                                                        final Subscription subscription) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId + "/txpush",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId + "/txpush",
                 subscription,
                 null,
                 null);
@@ -69,11 +70,11 @@ public class DefaultTxPushOperations extends DefaultOperations implements TxPush
     }
 
     @Override
-    public void disableTxPushNotifications(String customerId, String accountId) {
+    public void disableTxPushNotifications(final String customerId, final String accountId) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executeDelete("/v1/customers/" + customerId + "/accounts/" + accountId + "/txpush",
+        final Response response = restClient.executeDelete("/v1/customers/" + customerId + "/accounts/" + accountId + "/txpush",
                 null,
                 null);
 
@@ -83,11 +84,11 @@ public class DefaultTxPushOperations extends DefaultOperations implements TxPush
     }
 
     @Override
-    public void deleteTxPushSubscription(String customerId, String subscriptionId) {
+    public void deleteTxPushSubscription(final String customerId, final String subscriptionId) {
         assert customerId != null;
         assert subscriptionId != null;
 
-        Response response = restClient.executeDelete("/v1/customers/" + customerId + "/subscriptions/" + subscriptionId + "",
+        final Response response = restClient.executeDelete("/v1/customers/" + customerId + "/subscriptions/" + subscriptionId + "",
                 null,
                 null);
 
@@ -97,11 +98,12 @@ public class DefaultTxPushOperations extends DefaultOperations implements TxPush
     }
 
     @Override
-    public Transaction addTransactionForTestingAccount(String customerId, String accountId, Transaction transaction) {
+    public Transaction addTransactionForTestingAccount(final String customerId, final String accountId,
+                                                       final Transaction transaction) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId + "/transactions",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId + "/transactions",
                 transaction,
                 null,
                 null);

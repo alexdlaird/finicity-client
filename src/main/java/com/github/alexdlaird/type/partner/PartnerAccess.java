@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.partner;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -35,7 +36,7 @@ public class PartnerAccess implements Body {
     public PartnerAccess() {
     }
 
-    public PartnerAccess(String token) {
+    public PartnerAccess(final String token) {
         this.token = token;
     }
 

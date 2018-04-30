@@ -38,9 +38,7 @@ public interface CustomerOperations {
      * any combination of firstName and lastName fields. If no search text is provided, return all customers. See <a
      * href="https://finicity.zendesk.com/hc/en-us/articles/202460545">Handling Spaces in Queries</a> to search for
      * multiple words. See <a href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling
-     * Dates and Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 200 (OK)
+     * Dates and Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 200 (OK)
      *
      * @param search   Query: Text to match (leave empty to return all customers)
      * @param username Query: Username for exact match
@@ -48,87 +46,72 @@ public interface CustomerOperations {
      * @param limit    Query: Maximum number of entries for this page of results (default is 25)
      * @param type     Query: testing or active (default is active)
      * @return All the customers matching the given query.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
-    List<Customer> getCustomers(String search, String username, Integer start, Integer limit, CustomerType type);
+    List<Customer> getCustomers(final String search, final String username, final Integer start, final Integer limit,
+                                final CustomerType type);
 
     /**
      * Get details for an enrolled customer. See <a href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling
-     * Dates and Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 200 (OK)
+     * Dates and Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 200 (OK)
      *
      * @param customerId (required) ID of the customer
      * @return The customer matching the given ID.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
-    Customer getCustomer(String customerId);
+    Customer getCustomer(final String customerId);
 
     /**
      * Enroll a testing customer. A testing customer may only register accounts with FinBank (institution ID 101732) or
      * FinBank - Subaccounts (institution ID 101806). See Testing Accounts for more details. See <a
      * href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling Dates and
-     * Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 201 (Created)
+     * Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 201 (Created)
      *
      * @param customer (required) The customer to be created.
      * @return The newly created customer.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
-    Customer addTestingCustomer(Customer customer);
+    Customer addTestingCustomer(final Customer customer);
 
     /**
-     * This service is not available from the Test Drive.
-     * <p>
-     * Enroll an active customer (the actual owner of one or more real-world accounts). The customer's account
-     * transactions will be refreshed every night. See <a href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling
-     * Dates and Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 201 (Created)
+     * This service is not available from the Test Drive. <p> Enroll an active customer (the actual owner of one or more
+     * real-world accounts). The customer's account transactions will be refreshed every night. See <a
+     * href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling Dates and
+     * Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 201 (Created)
      *
      * @param customer (required) The customer to be created.
      * @return The newly created customer.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
-    Customer addCustomer(Customer customer);
+    Customer addCustomer(final Customer customer);
 
     /**
-     * Modify the details for an enrolled customer.
-     * <p>
-     * Success: HTTP 204 (No Content)
+     * Modify the details for an enrolled customer. <p> Success: HTTP 204 (No Content)
      *
      * @param customer (required) The customer data to be modified.
      * @throws FinicityException An error occurred when interaction with the API
      */
-    void modifyCustomer(Customer customer);
+    void modifyCustomer(final Customer customer);
 
     /**
      * Completely remove a customer from the system. This will remove the customer and all associated accounts,
-     * transactions, and aggregation support tickets.
-     * <p>
-     * USE THIS SERVICE CAREFULLY! It will perform the operation immediately, without pausing for confirmation!
-     * <p>
-     * Success: HTTP 204 (No Content)
+     * transactions, and aggregation support tickets. <p> USE THIS SERVICE CAREFULLY! It will perform the operation
+     * immediately, without pausing for confirmation! <p> Success: HTTP 204 (No Content)
      *
      * @param customerId (required) The ID matching the customer to be deleted.
      * @throws FinicityException An error occurred when interaction with the API
      */
-    void deleteCustomer(String customerId);
+    void deleteCustomer(final String customerId);
 
     /**
      * An error has occurred when processing an operation in {@link CustomerOperations}.
      */
     class CustomerOperationsException extends FinicityException {
-        public CustomerOperationsException(String msg, Exception cause) {
+        public CustomerOperationsException(final String msg, final Exception cause) {
             super(msg, cause);
         }
 
-        public CustomerOperationsException(String msg) {
+        public CustomerOperationsException(final String msg) {
             super(msg);
         }
     }

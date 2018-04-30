@@ -41,7 +41,8 @@ public class Categorization {
     public Categorization() {
     }
 
-    public Categorization(String normalizedPayeeName, String category, String scheduleC, String sic) {
+    public Categorization(final String normalizedPayeeName, final String category, final String scheduleC,
+                          final String sic) {
         this.normalizedPayeeName = normalizedPayeeName;
         this.category = category;
         this.scheduleC = scheduleC;

@@ -25,20 +25,17 @@ package com.github.alexdlaird.component;
 
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.transform.Matcher;
-import org.simpleframework.xml.transform.Transform;
 
 /**
  * Extends {@link Persister} and adds Enum functionality based off of the {@link EnumTransform} implementation.
  */
 public class FinicityPersister extends Persister {
     public FinicityPersister() {
-        super(new Matcher() {
-            public Transform match(Class type) throws Exception {
-                if (type.isEnum()) {
-                    return new EnumTransform(type);
-                }
-                return null;
+        super((Matcher) type -> {
+            if (type.isEnum()) {
+                return new EnumTransform(type);
             }
+            return null;
         });
     }
 }

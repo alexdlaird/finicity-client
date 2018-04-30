@@ -46,13 +46,14 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
      * @param appKey     Finicity appKey.
      * @param token      Finicity authentication token.
      */
-    public DefaultCustomerOperations(RestClient restClient, String appKey, Token token) {
+    public DefaultCustomerOperations(final RestClient restClient, final String appKey, final Token token) {
         super(restClient, appKey, token);
     }
 
     @Override
-    public List<Customer> getCustomers(String search, String username, Integer start, Integer limit, CustomerType type) {
-        List<Parameter> parameters = new ArrayList<>();
+    public List<Customer> getCustomers(final String search, final String username, final Integer start,
+                                       final Integer limit, final CustomerType type) {
+        final List<Parameter> parameters = new ArrayList<>();
         if (StringUtils.isNotBlank(search)) {
             parameters.add(new Parameter("search", search));
         }
@@ -69,7 +70,7 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
             parameters.add(new Parameter("type", type.toString()));
         }
 
-        Response response = restClient.executeGet("/v1/customers",
+        final Response response = restClient.executeGet("/v1/customers",
                 parameters,
                 null);
 
@@ -85,10 +86,10 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
     }
 
     @Override
-    public Customer getCustomer(String customerId) {
+    public Customer getCustomer(final String customerId) {
         assert customerId != null;
 
-        Response response = restClient.executeGet("/v1/customers/" + customerId,
+        final Response response = restClient.executeGet("/v1/customers/" + customerId,
                 null,
                 null);
 
@@ -104,10 +105,10 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
     }
 
     @Override
-    public Customer addTestingCustomer(Customer customer) {
+    public Customer addTestingCustomer(final Customer customer) {
         assert customer != null;
 
-        Response response = restClient.executePost("/v1/customers/testing",
+        final Response response = restClient.executePost("/v1/customers/testing",
                 customer,
                 null,
                 null);
@@ -124,10 +125,10 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
     }
 
     @Override
-    public Customer addCustomer(Customer customer) {
+    public Customer addCustomer(final Customer customer) {
         assert customer != null;
 
-        Response response = restClient.executePost("/v1/customers/active",
+        final Response response = restClient.executePost("/v1/customers/active",
                 customer,
                 null,
                 null);
@@ -144,10 +145,10 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
     }
 
     @Override
-    public void modifyCustomer(Customer customer) {
+    public void modifyCustomer(final Customer customer) {
         assert customer != null;
 
-        Response response = restClient.executePut("/v1/customers/" + customer.getId(),
+        final Response response = restClient.executePut("/v1/customers/" + customer.getId(),
                 customer,
                 null,
                 null);
@@ -158,10 +159,10 @@ public class DefaultCustomerOperations extends DefaultOperations implements Cust
     }
 
     @Override
-    public void deleteCustomer(String customerId) {
+    public void deleteCustomer(final String customerId) {
         assert customerId != null;
 
-        Response response = restClient.executeDelete("/v1/customers/" + customerId,
+        final Response response = restClient.executeDelete("/v1/customers/" + customerId,
                 null,
                 null);
 

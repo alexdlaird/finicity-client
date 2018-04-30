@@ -43,7 +43,7 @@ public class Parameter {
      * @param name  Name of the field.
      * @param value Value of the field.
      */
-    public Parameter(String name, String value) {
+    public Parameter(final String name, final String value) {
         this.name = name;
         this.value = value;
     }

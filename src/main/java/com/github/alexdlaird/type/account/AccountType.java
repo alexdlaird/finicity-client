@@ -37,7 +37,7 @@ public enum AccountType {
 
     private final String name;
 
-    AccountType(String name) {
+    AccountType(final String name) {
         this.name = name;
     }
 

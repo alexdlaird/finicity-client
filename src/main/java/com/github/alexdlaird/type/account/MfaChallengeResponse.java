@@ -38,7 +38,7 @@ public class MfaChallengeResponse implements AccountResponse {
     public MfaChallengeResponse() {
     }
 
-    public MfaChallengeResponse(List<MfaQuestion> questions) {
+    public MfaChallengeResponse(final List<MfaQuestion> questions) {
         this.questions = questions;
     }
 
@@ -50,7 +50,7 @@ public class MfaChallengeResponse implements AccountResponse {
         return session;
     }
 
-    public void setSession(String session) {
+    public void setSession(final String session) {
         this.session = session;
     }
 }

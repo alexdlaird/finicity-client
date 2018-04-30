@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.tx_push;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -47,7 +48,8 @@ public class Subscription implements Body {
     public Subscription() {
     }
 
-    public Subscription(String id, String accountId, SubscriptionType type, String callbackUrl, String signingKey) {
+    public Subscription(final String id, final String accountId, final SubscriptionType type, final String callbackUrl,
+                        final String signingKey) {
         this.id = id;
         this.accountId = accountId;
         this.type = type;

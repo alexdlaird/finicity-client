@@ -52,7 +52,7 @@ public class Response {
      * @param body         The body of the response.
      * @param headerFields Header fields in the response.
      */
-    public Response(int statusCode, String body, Map<String, List<String>> headerFields) {
+    public Response(final int statusCode, final String body, final Map<String, List<String>> headerFields) {
         this.statusCode = statusCode;
         this.body = body;
         this.headerFields = headerFields;

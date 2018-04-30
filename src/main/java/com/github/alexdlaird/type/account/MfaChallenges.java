@@ -46,7 +46,7 @@ public class MfaChallenges {
     public MfaChallenges() {
     }
 
-    public MfaChallenges(List<MfaChallengeResponse> mfaChallenges) {
+    public MfaChallenges(final List<MfaChallengeResponse> mfaChallenges) {
         this.mfaChallenges = mfaChallenges;
     }
 

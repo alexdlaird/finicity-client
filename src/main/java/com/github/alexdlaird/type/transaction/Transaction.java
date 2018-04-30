@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.transaction;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -98,14 +99,21 @@ public class Transaction implements Body {
     public Transaction() {
     }
 
-    public Transaction(Double amount, String description, Long postedDate, Long transactionDate) {
+    public Transaction(final Double amount, final String description, final Long postedDate,
+                       final Long transactionDate) {
         this.amount = amount;
         this.description = description;
         this.postedDate = postedDate;
         this.transactionDate = transactionDate;
     }
 
-    public Transaction(String accountId, Double amount, Double bonusAmount, String checkNum, Long createdDate, String customerId, String description, Double escrowAmount, Double feeAmount, String id, String institutionTransactionId, Double interestAmount, String memo, Long postedDate, Double principalAmount, TransactionStatus status, Subaccount subaccount, Long transactionDate, String type, Double unitQuantity, Double unitValue, Categorization categorization) {
+    public Transaction(final String accountId, final Double amount, final Double bonusAmount, final String checkNum,
+                       final Long createdDate, final String customerId, final String description,
+                       final Double escrowAmount, final Double feeAmount, final String id,
+                       final String institutionTransactionId, final Double interestAmount, final String memo,
+                       final Long postedDate, final Double principalAmount, final TransactionStatus status,
+                       final Subaccount subaccount, final Long transactionDate, final String type, Double unitQuantity,
+                       final Double unitValue, final Categorization categorization) {
         this.accountId = accountId;
         this.amount = amount;
         this.bonusAmount = bonusAmount;

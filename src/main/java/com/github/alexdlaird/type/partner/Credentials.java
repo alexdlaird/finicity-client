@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.partner;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -41,12 +42,12 @@ public class Credentials implements Body {
     public Credentials() {
     }
 
-    public Credentials(String partnerId, String partnerSecret) {
+    public Credentials(final String partnerId, final String partnerSecret) {
         this.partnerId = partnerId;
         this.partnerSecret = partnerSecret;
     }
 
-    public Credentials(String partnerId, String partnerSecret, String newPartnerSecret) {
+    public Credentials(final String partnerId, final String partnerSecret, final String newPartnerSecret) {
         this.partnerId = partnerId;
         this.partnerSecret = partnerSecret;
         this.newPartnerSecret = newPartnerSecret;

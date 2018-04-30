@@ -36,20 +36,14 @@ public interface PartnerOperations {
      * access token. The token must be passed in the HTTP header Finicity-App-Token on all subsequent API requests (see
      * <a href="https://finicity.zendesk.com/hc/en-us/articles/202460715-Accessing-the-API">Accessing the API</a>). This
      * token is valid for two hours, after which the partner must call Partner Authentication again to obtain a new
-     * token.
-     * <p>
-     * Ten unsuccessful attempts will cause the partner’s account to be locked. To unlock the account, send an email to
-     * <a href="mailto:support@finicity.com"></a>Finicity Support.
-     * <p>
-     * Success: HTTP 200 (OK)
-     * <p>
-     * Though this function is documented in the interface and publically accessible, token management should be done by
-     * the {@link FinicityClient} and Operations classes to ensure this method is called as infrequently as possible.
+     * token. <p> Ten unsuccessful attempts will cause the partner’s account to be locked. To unlock the account, send
+     * an email to <a href="mailto:support@finicity.com"></a>Finicity Support. <p> Success: HTTP 200 (OK) <p> Though
+     * this function is documented in the interface and publically accessible, token management should be done by the
+     * {@link FinicityClient} and Operations classes to ensure this method is called as infrequently as possible.
      * Retrieving a token too often or having too many active tokens at the same may cause you to fall into ill favor
      * with Finicity.
      *
      * @return An object with a temporary access token
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     PartnerAccess authentication();
@@ -58,11 +52,9 @@ public interface PartnerOperations {
      * Change the partner secret that is used to authenticate this partner. The secret does not expire, but can be
      * changed by calling Modify Partner Secret. A valid partner secret MUST include at least one number and at least
      * one letter, and its length MUST be between 12 and 255 characters. It MAY contain upper- and lowercase characters,
-     * numbers, and the characters with !,@,#,$,%,&#x26;,*,_,-,+.
-     * <p>
-     * Success: HTTP 204 (No Content)
+     * numbers, and the characters with !,@,#,$,%,&#x26;,*,_,-,+. <p> Success: HTTP 204 (No Content)
      *
-     * @param newPartnerSecret   The new secret to be set for the partner.
+     * @param newPartnerSecret The new secret to be set for the partner.
      * @throws FinicityException An error occurred when interaction with the API
      */
     void modifyPartnerSecret(String newPartnerSecret);

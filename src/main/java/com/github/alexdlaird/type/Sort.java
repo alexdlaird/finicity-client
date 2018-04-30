@@ -29,7 +29,7 @@ public enum Sort {
 
     private final String name;
 
-    Sort(String name) {
+    Sort(final String name) {
         this.name = name;
     }
 

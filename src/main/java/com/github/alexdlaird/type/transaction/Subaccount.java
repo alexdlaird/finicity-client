@@ -35,7 +35,7 @@ public class Subaccount {
     public Subaccount() {
     }
 
-    public Subaccount(String name, String number) {
+    public Subaccount(final String name, final String number) {
         this.name = name;
         this.number = number;
     }

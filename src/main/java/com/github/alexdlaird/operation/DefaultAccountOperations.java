@@ -26,8 +26,15 @@ package com.github.alexdlaird.operation;
 import com.github.alexdlaird.component.Token;
 import com.github.alexdlaird.component.rest.Response;
 import com.github.alexdlaird.component.rest.RestClient;
+import com.github.alexdlaird.type.account.Account;
+import com.github.alexdlaird.type.account.AccountLoginForm;
+import com.github.alexdlaird.type.account.AccountMfaChallenge;
+import com.github.alexdlaird.type.account.AccountResponse;
+import com.github.alexdlaird.type.account.Accounts;
+import com.github.alexdlaird.type.account.MfaChallengeRequest;
+import com.github.alexdlaird.type.account.MfaChallengeResponse;
+import com.github.alexdlaird.type.account.MfaChallenges;
 import com.github.alexdlaird.type.institution.LoginForm;
-import com.github.alexdlaird.type.account.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -51,11 +58,11 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
      * @param appKey     Finicity appKey.
      * @param token      Finicity authentication token.
      */
-    public DefaultAccountOperations(RestClient restClient, String appKey, Token token) {
+    public DefaultAccountOperations(final RestClient restClient, final String appKey, final Token token) {
         super(restClient, appKey, token);
     }
 
-    private List<? extends AccountResponse> processAccountResponses(Response response) {
+    private List<? extends AccountResponse> processAccountResponses(final Response response) {
         try {
             if (response.getStatusCode() == 200) {
                 LOGGER.log(Level.FINE, "Parsing Account response");
@@ -73,8 +80,8 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
         }
     }
 
-    private List<? extends AccountResponse> serializeMfaChallenges(Response response) throws Exception {
-        List<MfaChallengeResponse> mfaChallengeResponses = serializer.read(MfaChallenges.class, response.getBody()).getMfaChallenges();
+    private List<? extends AccountResponse> serializeMfaChallenges(final Response response) throws Exception {
+        final List<MfaChallengeResponse> mfaChallengeResponses = serializer.read(MfaChallenges.class, response.getBody()).getMfaChallenges();
         for (MfaChallengeResponse mfaChallengeResponse : mfaChallengeResponses) {
             mfaChallengeResponse.setSession(response.getHeaderFields().get("MFA-Session").get(0));
         }
@@ -82,12 +89,13 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<? extends AccountResponse> addAllAccounts(String customerId, String institutionId, AccountLoginForm accounts) {
+    public List<? extends AccountResponse> addAllAccounts(final String customerId, final String institutionId,
+                                                          final AccountLoginForm accounts) {
         assert customerId != null;
         assert institutionId != null;
         assert accounts != null;
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts/addall",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts/addall",
                 accounts,
                 null,
                 null);
@@ -96,16 +104,18 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<? extends AccountResponse> addAllAccountsMfa(String mfaSession, String customerId, String institutionId, AccountMfaChallenge accounts) {
+    public List<? extends AccountResponse> addAllAccountsMfa(final String mfaSession, final String customerId,
+                                                             final String institutionId,
+                                                             final AccountMfaChallenge accounts) {
         assert mfaSession != null;
         assert customerId != null;
         assert institutionId != null;
         assert accounts != null;
 
-        Map<String, String> additionalHeaders = new HashMap<>();
+        final Map<String, String> additionalHeaders = new HashMap<>();
         additionalHeaders.put("MFA-Session", mfaSession);
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts/addall/mfa",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts/addall/mfa",
                 accounts,
                 null,
                 additionalHeaders);
@@ -114,12 +124,13 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<? extends AccountResponse> discoverAccounts(String customerId, String institutionId, AccountLoginForm accounts) {
+    public List<? extends AccountResponse> discoverAccounts(final String customerId, final String institutionId,
+                                                            final AccountLoginForm accounts) {
         assert customerId != null;
         assert institutionId != null;
         assert accounts != null;
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts",
                 accounts,
                 null,
                 null);
@@ -128,16 +139,18 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<? extends AccountResponse> discoverAccountsMfa(String mfaSession, String customerId, String institutionId, AccountMfaChallenge accounts) {
+    public List<? extends AccountResponse> discoverAccountsMfa(final String mfaSession, final String customerId,
+                                                               final String institutionId,
+                                                               final AccountMfaChallenge accounts) {
         assert mfaSession != null;
         assert customerId != null;
         assert institutionId != null;
         assert accounts != null;
 
-        Map<String, String> additionalHeaders = new HashMap<>();
+        final Map<String, String> additionalHeaders = new HashMap<>();
         additionalHeaders.put("MFA-Session", mfaSession);
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts/mfa",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts/mfa",
                 accounts,
                 null,
                 additionalHeaders);
@@ -146,12 +159,13 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<Account> activateAccounts(String customerId, String institutionId, Accounts accounts) {
+    public List<Account> activateAccounts(final String customerId, final String institutionId,
+                                          final Accounts accounts) {
         assert customerId != null;
         assert institutionId != null;
         assert accounts != null;
 
-        Response response = restClient.executePut("/v2/customers/" + customerId + "/institutions/" + institutionId + "/accounts",
+        final Response response = restClient.executePut("/v2/customers/" + customerId + "/institutions/" + institutionId + "/accounts",
                 accounts,
                 null,
                 null);
@@ -164,11 +178,11 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<? extends AccountResponse> refreshAccount(String customerId, String accountId) {
+    public List<? extends AccountResponse> refreshAccount(final String customerId, final String accountId) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId,
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId,
                 null,
                 null,
                 null);
@@ -177,16 +191,18 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<? extends AccountResponse> refreshAccountMfa(String mfaSession, String customerId, String accountId, MfaChallengeRequest mfaChallenges) {
+    public List<? extends AccountResponse> refreshAccountMfa(final String mfaSession, final String customerId,
+                                                             final String accountId,
+                                                             final MfaChallengeRequest mfaChallenges) {
         assert mfaSession != null;
         assert customerId != null;
         assert accountId != null;
         assert mfaChallenges != null;
 
-        Map<String, String> headers = new HashMap<>();
+        final Map<String, String> headers = new HashMap<>();
         headers.put("MFA-Session", mfaSession);
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId,
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts/" + accountId,
                 mfaChallenges,
                 null,
                 headers);
@@ -195,10 +211,10 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<Account> refreshAccounts(String customerId) {
+    public List<Account> refreshAccounts(final String customerId) {
         assert customerId != null;
 
-        Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts",
+        final Response response = restClient.executePost("/v1/customers/" + customerId + "/accounts",
                 null,
                 null,
                 null);
@@ -211,10 +227,10 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<Account> getAccounts(String customerId) {
+    public List<Account> getAccounts(final String customerId) {
         assert customerId != null;
 
-        Response response = restClient.executeGet("/v1/customers/" + customerId + "/accounts",
+        final Response response = restClient.executeGet("/v1/customers/" + customerId + "/accounts",
                 null,
                 null);
 
@@ -230,11 +246,11 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public List<Account> getAccounts(String customerId, String institutionId) {
+    public List<Account> getAccounts(final String customerId, final String institutionId) {
         assert customerId != null;
         assert institutionId != null;
 
-        Response response = restClient.executeGet("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts",
+        final Response response = restClient.executeGet("/v1/customers/" + customerId + "/institutions/" + institutionId + "/accounts",
                 null,
                 null);
 
@@ -250,11 +266,11 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public Account getAccount(String customerId, String accountId) {
+    public Account getAccount(final String customerId, final String accountId) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executeGet("/v1/customers/" + customerId + "/accounts/" + accountId,
+        final Response response = restClient.executeGet("/v1/customers/" + customerId + "/accounts/" + accountId,
                 null,
                 null);
 
@@ -270,12 +286,12 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public void modifyAccount(String customerId, String accountId, Account account) {
+    public void modifyAccount(final String customerId, final String accountId, final Account account) {
         assert customerId != null;
         assert accountId != null;
         assert account != null;
 
-        Response response = restClient.executePut("/v1/customers/{customerId}/accounts/{accountId}",
+        final Response response = restClient.executePut("/v1/customers/{customerId}/accounts/{accountId}",
                 account,
                 null,
                 null);
@@ -286,11 +302,11 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public void deleteAccount(String customerId, String accountId) {
+    public void deleteAccount(final String customerId, final String accountId) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executeDelete("/v1/customers/" + customerId + "/accounts/" + accountId,
+        final Response response = restClient.executeDelete("/v1/customers/" + customerId + "/accounts/" + accountId,
                 null,
                 null);
 
@@ -300,11 +316,11 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public LoginForm getAccountLoginForm(String customerId, String accountId) {
+    public LoginForm getAccountLoginForm(final String customerId, final String accountId) {
         assert customerId != null;
         assert accountId != null;
 
-        Response response = restClient.executeGet("/v1/customers/" + customerId + "/accounts/" + accountId + "/loginForm",
+        final Response response = restClient.executeGet("/v1/customers/" + customerId + "/accounts/" + accountId + "/loginForm",
                 null,
                 null);
 
@@ -320,12 +336,13 @@ public class DefaultAccountOperations extends DefaultOperations implements Accou
     }
 
     @Override
-    public void modifyAccountCredentials(String customerId, String accountId, LoginForm accountLoginForm) {
+    public void modifyAccountCredentials(final String customerId, final String accountId,
+                                         final LoginForm accountLoginForm) {
         assert customerId != null;
         assert accountId != null;
         assert accountLoginForm != null;
 
-        Response response = restClient.executePut("/v1/customers/{customerId}/accounts/{accountId}/loginForm",
+        final Response response = restClient.executePut("/v1/customers/{customerId}/accounts/{accountId}/loginForm",
                 accountLoginForm,
                 null,
                 null);

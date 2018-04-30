@@ -29,7 +29,7 @@ public enum AccountStatus {
 
     private final String name;
 
-    AccountStatus(String name) {
+    AccountStatus(final String name) {
         this.name = name;
     }
 

@@ -37,9 +37,7 @@ public interface TransactionOperations {
      * Get all transactions available for this customer within the given date range, across all accounts. This service
      * supports paging and sorting by transactionDate, with a maximum of 1000 transactions per request. See <a
      * href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling Dates and
-     * Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 200 (OK)
+     * Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 200 (OK)
      *
      * @param customerId     (required) ID of the customer
      * @param fromDate       (required) Query: Starting point for the date range
@@ -50,7 +48,6 @@ public interface TransactionOperations {
      *                       are on page 1); also allows asc for ascending order (oldest transactions are on page 1).
      * @param includePending Query: 'true' to include pending transactions
      * @return A list of transactions matching the query.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     List<Transaction> getTransactions(String customerId, Long fromDate, Long toDate, Integer start, Integer limit, Sort sort, Boolean includePending);
@@ -59,9 +56,7 @@ public interface TransactionOperations {
      * Get all transactions available for this customer account within the given date range. This service supports
      * paging and sorting by transactionDate, with a maximum of 1000 transactions per request. See <a
      * href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling Dates and
-     * Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 200 (OK)
+     * Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 200 (OK)
      *
      * @param customerId     (required) ID of the customer
      * @param accountId      (required) ID of the account
@@ -73,21 +68,17 @@ public interface TransactionOperations {
      *                       are on page 1); also allows asc for ascending order (oldest transactions are on page 1).
      * @param includePending Query: 'true' to include pending transactions
      * @return A list of transactions matching the query.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     List<Transaction> getAccountTransactions(String customerId, String accountId, Long fromDate, Long toDate, Integer start, Integer limit, Sort sort, Boolean includePending);
 
     /**
      * Get details for the specified transaction. See <a href="https://finicity.zendesk.com/hc/en-us/articles/201703569-Handling-Dates-and-Times">Handling
-     * Dates and Times</a> to understand how timestamps are used in this API.
-     * <p>
-     * Success: HTTP 200 (OK)
+     * Dates and Times</a> to understand how timestamps are used in this API. <p> Success: HTTP 200 (OK)
      *
      * @param customerId    (required) ID of the customer
      * @param transactionId (required) ID of the transaction
      * @return The transaction matching the ID given.
-     *
      * @throws FinicityException An error occurred when interaction with the API
      */
     Transaction getTransaction(String customerId, String transactionId);

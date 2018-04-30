@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -39,7 +40,7 @@ public class MfaChallengeRequest implements Body {
     public MfaChallengeRequest() {
     }
 
-    public MfaChallengeRequest(List<MfaQuestion> questions) {
+    public MfaChallengeRequest(final List<MfaQuestion> questions) {
         this.questions = questions;
     }
 
@@ -51,7 +52,7 @@ public class MfaChallengeRequest implements Body {
         return session;
     }
 
-    public void setSession(String session) {
+    public void setSession(final String session) {
         this.session = session;
     }
 }

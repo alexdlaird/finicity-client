@@ -51,7 +51,8 @@ public class DefaultPartnerOperations extends DefaultOperations implements Partn
      * @param partnerId     Finicity partnerId.
      * @param partnerSecret Finicity partnerSecret.
      */
-    public DefaultPartnerOperations(RestClient restClient, String appKey, String partnerId, String partnerSecret) {
+    public DefaultPartnerOperations(final RestClient restClient, final String appKey, final String partnerId,
+                                    final String partnerSecret) {
         super(restClient, appKey, null);
 
         this.partnerId = partnerId;
@@ -64,15 +65,15 @@ public class DefaultPartnerOperations extends DefaultOperations implements Partn
      * @param token Unused.
      */
     @Override
-    public void refreshToken(Token token) {
+    public void refreshToken(final Token token) {
         throw new UnsupportedOperationException();
     }
 
     @Override
     public PartnerAccess authentication() {
-        Credentials credentials = new Credentials(partnerId, partnerSecret);
+        final Credentials credentials = new Credentials(partnerId, partnerSecret);
 
-        Response response = restClient.executePost("/v2/partners/authentication",
+        final Response response = restClient.executePost("/v2/partners/authentication",
                 credentials,
                 null,
                 null);
@@ -89,10 +90,10 @@ public class DefaultPartnerOperations extends DefaultOperations implements Partn
     }
 
     @Override
-    public void modifyPartnerSecret(String newPartnerSecret) {
-        Credentials credentials = new Credentials(partnerId, partnerSecret, newPartnerSecret);
+    public void modifyPartnerSecret(final String newPartnerSecret) {
+        final Credentials credentials = new Credentials(partnerId, partnerSecret, newPartnerSecret);
 
-        Response response = restClient.executePut("/v2/partners/authentication",
+        final Response response = restClient.executePut("/v2/partners/authentication",
                 credentials,
                 null,
                 null);

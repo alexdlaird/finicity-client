@@ -38,7 +38,8 @@ public interface RestClient {
      * @param additionalHeaders Additional headers for the request.
      * @return The results of the query.
      */
-    Response executeGet(String url, List<Parameter> parameters, Map<String, String> additionalHeaders);
+    Response executeGet(final String url, final List<Parameter> parameters,
+                        final Map<String, String> additionalHeaders);
 
     /**
      * Perform POST operation against Finicity's API.
@@ -49,7 +50,8 @@ public interface RestClient {
      * @param additionalHeaders Additional headers for the request.
      * @return The results of the query.
      */
-    Response executePost(String url, Body body, List<Parameter> parameters, Map<String, String> additionalHeaders);
+    Response executePost(final String url, final Body body, final List<Parameter> parameters,
+                         final Map<String, String> additionalHeaders);
 
     /**
      * Perform PUT operation against Finicity's API.
@@ -60,7 +62,8 @@ public interface RestClient {
      * @param additionalHeaders Additional headers for the request.
      * @return The results of the query.
      */
-    Response executePut(String url, Body body, List<Parameter> parameters, Map<String, String> additionalHeaders);
+    Response executePut(final String url, final Body body, final List<Parameter> parameters,
+                        final Map<String, String> additionalHeaders);
 
     /**
      * Perform DELETE operation against Finicity's API.
@@ -70,20 +73,21 @@ public interface RestClient {
      * @param additionalHeaders Additional headers for the request.
      * @return The results of the query.
      */
-    Response executeDelete(String url, List<Parameter> parameters, Map<String, String> additionalHeaders);
+    Response executeDelete(final String url, final List<Parameter> parameters,
+                           final Map<String, String> additionalHeaders);
 
     class RestClientException extends RuntimeException {
-        public RestClientException(String msg) {
+        public RestClientException(final String msg) {
             super(msg);
         }
 
-        public RestClientException(String msg, Exception cause) {
+        public RestClientException(final String msg, final Exception cause) {
             super(msg, cause);
         }
     }
 
     class RestClientTokenExpiredException extends RestClientException {
-        public RestClientTokenExpiredException(String msg) {
+        public RestClientTokenExpiredException(final String msg) {
             super(msg);
         }
     }

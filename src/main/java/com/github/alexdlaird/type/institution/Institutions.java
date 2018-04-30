@@ -46,7 +46,7 @@ public class Institutions {
     public Institutions() {
     }
 
-    public Institutions(List<Institution> institutions) {
+    public Institutions(final List<Institution> institutions) {
         this.institutions = institutions;
     }
 

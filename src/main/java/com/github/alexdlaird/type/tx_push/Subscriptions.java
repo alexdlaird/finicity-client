@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.tx_push;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
 
@@ -37,7 +38,7 @@ public class Subscriptions implements Body {
     public Subscriptions() {
     }
 
-    public Subscriptions(List<Subscription> subscriptions) {
+    public Subscriptions(final List<Subscription> subscriptions) {
         this.subscriptions = subscriptions;
     }
 

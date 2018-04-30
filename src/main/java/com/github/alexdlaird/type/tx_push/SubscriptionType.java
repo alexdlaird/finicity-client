@@ -29,7 +29,7 @@ public enum SubscriptionType {
 
     private final String name;
 
-    SubscriptionType(String name) {
+    SubscriptionType(final String name) {
         this.name = name;
     }
 

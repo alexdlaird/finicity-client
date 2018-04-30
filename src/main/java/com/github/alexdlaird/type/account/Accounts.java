@@ -24,6 +24,7 @@
 package com.github.alexdlaird.type.account;
 
 import com.github.alexdlaird.component.rest.Body;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Root;
@@ -47,7 +48,7 @@ public class Accounts implements Body {
     public Accounts() {
     }
 
-    public Accounts(List<Account> accounts) {
+    public Accounts(final List<Account> accounts) {
         this.accounts = accounts;
     }
 

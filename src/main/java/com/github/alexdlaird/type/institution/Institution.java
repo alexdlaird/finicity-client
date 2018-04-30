@@ -83,7 +83,11 @@ public class Institution {
     public Institution() {
     }
 
-    public Institution(Integer id, String name, String accountTypeDescription, String urlHomeApp, String urlLogonApp, String phone, String currency, String email, String specialText, String addressLine1, String addressLine2, String city, String state, String postalCode, String country) {
+    public Institution(final Integer id, final String name, final String accountTypeDescription,
+                       final String urlHomeApp, final String urlLogonApp, final String phone, final String currency,
+                       final String email, final String specialText, final String addressLine1,
+                       final String addressLine2, final String city, final String state, final String postalCode,
+                       final String country) {
         this.id = id;
         this.name = name;
         this.accountTypeDescription = accountTypeDescription;

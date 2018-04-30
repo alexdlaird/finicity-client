@@ -41,17 +41,16 @@ public class StringUtils {
      * @param inputStream The Input Stream to read from.
      * @param charset     The charset of the Input Stream.
      * @return The resulting String.
-     *
      * @throws IOException An I/O error has occurred.
      */
-    public static String streamToString(InputStream inputStream, Charset charset) throws IOException {
+    public static String streamToString(final InputStream inputStream, final Charset charset) throws IOException {
         if (inputStream == null) {
             return null;
         }
 
-        char[] buffer = new char[DEFAULT_BUFFER_SIZE];
-        StringBuilder stringBuilder = new StringBuilder();
-        Reader reader = new InputStreamReader(inputStream, charset);
+        final char[] buffer = new char[DEFAULT_BUFFER_SIZE];
+        final StringBuilder stringBuilder = new StringBuilder();
+        final Reader reader = new InputStreamReader(inputStream, charset);
 
         int size = reader.read(buffer, 0, buffer.length);
         while (size >= 0) {
@@ -69,7 +68,7 @@ public class StringUtils {
      * @param cs The character sequence to check for text.
      * @return True if not blank, false otherwise.
      */
-    public static boolean isNotBlank(CharSequence cs) {
+    public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
 
@@ -79,7 +78,7 @@ public class StringUtils {
      * @param cs The character sequence to check for text.
      * @return True if blank, false otherwise.
      */
-    public static boolean isBlank(CharSequence cs) {
+    public static boolean isBlank(final CharSequence cs) {
         int strLen;
 
         if (cs == null || (strLen = cs.length()) == 0) {

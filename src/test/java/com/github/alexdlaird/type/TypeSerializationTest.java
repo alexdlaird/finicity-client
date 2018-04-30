@@ -24,13 +24,18 @@
 package com.github.alexdlaird.type;
 
 import com.github.alexdlaird.component.FinicityPersister;
+import com.github.alexdlaird.type.account.AccountLoginForm;
+import com.github.alexdlaird.type.account.AccountMfaChallenge;
+import com.github.alexdlaird.type.account.Accounts;
+import com.github.alexdlaird.type.account.MfaChallengeRequest;
+import com.github.alexdlaird.type.account.MfaChallenges;
 import com.github.alexdlaird.type.customer.Customers;
 import com.github.alexdlaird.type.institution.InstitutionDetails;
 import com.github.alexdlaird.type.institution.Institutions;
 import com.github.alexdlaird.type.partner.PartnerAccess;
 import com.github.alexdlaird.type.transaction.Transactions;
 import com.github.alexdlaird.type.tx_push.Subscriptions;
-import com.github.alexdlaird.type.account.*;
+
 import org.junit.Test;
 import org.simpleframework.xml.Serializer;
 

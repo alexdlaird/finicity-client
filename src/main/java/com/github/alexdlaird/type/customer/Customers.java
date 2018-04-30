@@ -46,7 +46,7 @@ public class Customers {
     public Customers() {
     }
 
-    public Customers(List<Customer> customers) {
+    public Customers(final List<Customer> customers) {
         this.customers = customers;
     }
 
