@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alexdlaird/finicity-client.svg)](https://travis-ci.org/alexdlaird/finicity-client)
+[![Build Status](https://travis-ci.com/alexdlaird/finicity-client.svg)](https://travis-ci.com/alexdlaird/finicity-client)
 
 # Finicity Client
 
