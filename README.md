@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/alexdlaird/finicity-client.svg)](https://travis-ci.com/alexdlaird/finicity-client)
+[![CI](https://github.com/alexdlaird/finicity-client/workflows/CI/badge.svg)](https://github.com/alexdlaird/finicity-client/actions?query=workflow%3ACI)
 
 # Finicity Client
 
